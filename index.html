@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZenLife — Wellness & Mind Relaxation</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ─── Reset & Base ─── (unchanged) */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --blue: #6bb5d9;
+            --blue-dark: #4a9bbf;
+            --green: #9bc9b0;
+            --green-dark: #72a888;
+            --neutral: #f6f2ed;
+            --neutral-dark: #e3dbd2;
+            --text: #2d3e40;
+            --text-light: #5a6f72;
+            --white: #ffffff;
+            --shadow: 0 12px 40px rgba(45, 62, 64, 0.10);
+            --radius: 24px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--neutral);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+            border-radius: var(--radius);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .section-sub {
+            color: var(--text-light);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--white);
+            color: var(--text);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            background: var(--blue);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(107, 181, 217, 0.35);
+        }
+        .btn-primary:hover {
+            background: var(--blue-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(107, 181, 217, 0.45);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--blue);
+            color: var(--blue);
+        }
+        .btn-outline:hover {
+            background: var(--blue);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+        .btn-green {
+            background: var(--green);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(155, 201, 176, 0.35);
+        }
+        .btn-green:hover {
+            background: var(--green-dark);
+            transform: translateY(-3px);
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(107, 181, 217, 0.15);
+            color: var(--blue-dark);
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            letter-spacing: 0.02em;
+            margin-bottom: 1rem;
+        }
+        /* ─── Nav ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(246, 242, 237, 0.75);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
+        }
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .logo i {
+            color: var(--blue);
+            font-size: 1.8rem;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blue);
+            transition: var(--transition);
+        }
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-cta {
+            background: var(--blue);
+            color: #fff !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            font-weight: 600;
+        }
+        .nav-cta::after {
+            display: none !important;
+        }
+        .nav-cta:hover {
+            background: var(--blue-dark);
+            color: #fff !important;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--text);
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+        /* ─── Hero ─── */
+        .hero {
+            padding: 140px 0 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(145deg, #f6f2ed 0%, #eaf0ec 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            right: -10%;
+            top: -20%;
+            width: 60%;
+            height: 140%;
+            background: radial-gradient(ellipse at 70% 40%, rgba(107, 181, 217, 0.12), transparent 70%);
+            pointer-events: none;
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 6vw, 4.4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.2rem;
+        }
+        .hero-content h1 span {
+            color: var(--blue);
+            position: relative;
+        }
+        .hero-content h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(107, 181, 217, 0.2);
+            border-radius: 6px;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 480px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(45, 62, 64, 0.06);
+        }
+        .hero-stats div {
+            text-align: left;
+        }
+        .hero-stats strong {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .hero-stats span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .hero-image .img-wrapper {
+            width: 100%;
+            max-width: 520px;
+            aspect-ratio: 4/3;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #d9e4df;
+            position: relative;
+        }
+        .hero-image .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .floating-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.8rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+        .floating-card i {
+            color: var(--green);
+            font-size: 1.2rem;
+        }
+        .floating-card:nth-child(2) {
+            top: 10%;
+            right: -8%;
+            animation-delay: 1s;
+        }
+        .floating-card:nth-child(3) {
+            bottom: 18%;
+            left: -10%;
+            animation-delay: 2s;
+        }
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+        /* ─── Features ─── */
+        .features {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: var(--neutral);
+            padding: 2rem 1.8rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--blue);
+            box-shadow: var(--shadow);
+        }
+        .feature-card .icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(107, 181, 217, 0.12);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--blue);
+            margin-bottom: 1.2rem;
+        }
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        /* ─── Testimonials ─── */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--neutral);
+        }
+        .testimonials .section-sub {
+            margin-bottom: 1rem;
+        }
+        .testimonial-slider {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 1rem 0.25rem 2rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .testimonial-slider::-webkit-scrollbar {
+            display: none;
+        }
+        .testimonial-card {
+            flex: 0 0 320px;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            scroll-snap-align: start;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+        .testimonial-card .stars {
+            color: #f5b342;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 2px;
+        }
+        .testimonial-card blockquote {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            color: var(--text);
+        }
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .testimonial-card .author .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .testimonial-card .author div {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .testimonial-card .author span {
+            font-weight: 400;
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        /* ─── Progress Tracker ─── */
+        .progress-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        .progress-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .progress-info h2 {
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+        .progress-info p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        .progress-item {
+            margin-bottom: 1.6rem;
+        }
+        .progress-item .label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+        .progress-track {
+            height: 8px;
+            background: var(--neutral-dark);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .progress-track .fill {
+            height: 100%;
+            border-radius: 12px;
+            background: linear-gradient(90deg, var(--blue), var(--green));
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .progress-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .progress-visual .ring-wrap {
+            position: relative;
+            width: 220px;
+            height: 220px;
+        }
+        .progress-visual .ring-wrap svg {
+            transform: rotate(-90deg);
+            width: 220px;
+            height: 220px;
+        }
+        .progress-visual .ring-wrap circle {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+        }
+        .progress-visual .ring-wrap .bg {
+            stroke: var(--neutral-dark);
+        }
+        .progress-visual .ring-wrap .progress-ring {
+            stroke: var(--blue);
+            stroke-dasharray: 565.48;
+            stroke-dashoffset: 565.48;
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .progress-visual .ring-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .progress-visual .ring-center strong {
+            display: block;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+        .progress-visual .ring-center span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        /* ─── Guided Meditation ─── */
+        .meditation {
+            padding: 80px 0;
+            background: linear-gradient(145deg, #eaf0ec, #f6f2ed);
+        }
+        .meditation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .meditation-video {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #1a2a2a;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .meditation-video .play-btn {
+            width: 72px;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+            transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .meditation-video:hover .play-btn {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .meditation-video .video-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+        .meditation-text h2 {
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+        .meditation-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        .meditation-text ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .meditation-text ul li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 500;
+        }
+        .meditation-text ul li i {
+            color: var(--green);
+            font-size: 1.2rem;
+            width: 24px;
+        }
+        /* ─── LIVE ZOOM SESSIONS ─── */
+        .live-sessions {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        .live-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .schedule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            background: var(--neutral);
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--blue);
+        }
+        .schedule-item:hover {
+            transform: translateX(6px);
+            box-shadow: var(--shadow);
+        }
+        .schedule-item i {
+            font-size: 1.4rem;
+            color: var(--blue);
+            margin-top: 2px;
+            width: 28px;
+            text-align: center;
+        }
+        .schedule-item div strong {
+            display: block;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .schedule-item div span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .live-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1.8rem;
+            margin: 1.8rem 0 2rem;
+            padding: 1rem 0;
+            border-top: 2px solid var(--neutral-dark);
+            border-bottom: 2px solid var(--neutral-dark);
+        }
+        .live-features span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .live-features span i {
+            color: var(--green);
+        }
+        .zoom-card {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #d9e4df;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .zoom-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .zoom-card:hover img {
+            transform: scale(1.05);
+        }
+        .live-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: pulse-badge 2s infinite;
+        }
+        @keyframes pulse-badge {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        .zoom-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(45, 62, 64, 0.3);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+            cursor: pointer;
+            color: #fff;
+        }
+        .zoom-card:hover .zoom-overlay {
+            opacity: 1;
+        }
+        .zoom-overlay i {
+            font-size: 3.5rem;
+            margin-bottom: 0.6rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .zoom-overlay span {
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.4rem 1.8rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+        .delivery-note {
+            background: var(--neutral);
+            padding: 0.8rem 1.2rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            color: var(--text-light);
+        }
+        .delivery-note i {
+            color: var(--blue);
+            font-size: 1.1rem;
+        }
+        /* ─── Pricing / Payment ─── */
+        .pricing {
+            padding: 80px 0;
+            background: var(--neutral);
+        }
+        .pricing .section-sub {
+            margin-bottom: 3rem;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .pricing-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .pricing-card.featured {
+            border-color: var(--blue);
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .pricing-card.featured .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--blue);
+            color: #fff;
+            padding: 0.2rem 1.4rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+        .pricing-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .pricing-card .price {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0.5rem 0 0.2rem;
+        }
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+        .pricing-card .desc {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        .pricing-card ul li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+        }
+        .pricing-card ul li i {
+            color: var(--green);
+            font-size: 1rem;
+            width: 20px;
+        }
+        .pricing-card .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        /* ─── Payment Modal (PayU style) ─── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 24px;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal {
+            background: var(--white);
+            max-width: 480px;
+            width: 100%;
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+            transform: translateY(30px) scale(0.96);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .modal-overlay.active .modal {
+            transform: translateY(0) scale(1);
+        }
+        .modal .close-modal {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        .modal .close-modal:hover {
+            color: var(--text);
+            transform: rotate(90deg);
+        }
+        .modal h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .modal p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        .modal .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+        .modal .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--neutral-dark);
+            border-radius: 16px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--neutral);
+        }
+        .modal .form-group input:focus {
+            outline: none;
+            border-color: var(--blue);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(107, 181, 217, 0.15);
+        }
+        .modal .payu-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background: #f2f6fc;
+            padding: 0.6rem;
+            border-radius: 12px;
+            margin: 1rem 0 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .modal .payu-badge img {
+            height: 24px;
+            width: auto;
+        }
+        .modal .secure-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.8rem;
+            justify-content: center;
+        }
+        .modal .secure-badge i {
+            color: var(--green);
+        }
+        .modal .btn {
+            width: 100%;
+            justify-content: center;
+            margin-top: 0.5rem;
+            padding: 1rem;
+            background: #1a2a3a;
+            color: #fff;
+            border: none;
+        }
+        .modal .btn:hover {
+            background: #0f1a26;
+            transform: translateY(-2px);
+        }
+        .modal .btn i {
+            margin-right: 0.5rem;
+        }
+        /* ─── Footer ─── */
+        footer {
+            background: var(--text);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 3rem 0 1.5rem;
+        }
+        footer .container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+        footer h4 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        footer ul {
+            list-style: none;
+        }
+        footer ul li {
+            margin-bottom: 0.4rem;
+        }
+        footer ul a {
+            transition: var(--transition);
+        }
+        footer ul a:hover {
+            color: #fff;
+        }
+        footer .socials {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+        footer .socials a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        footer .socials a:hover {
+            background: var(--blue);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+        footer .copyright {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+        /* ─── Responsive ─── */
+        @media (max-width: 992px) {
+            .hero .container,
+            .live-grid,
+            .progress-grid,
+            .meditation-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-actions {
+                justify-content: center;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .hero-image .img-wrapper {
+                max-width: 420px;
+                margin: 0 auto;
+            }
+            .floating-card {
+                display: none;
+            }
+            .progress-visual .ring-wrap {
+                margin: 0 auto;
+            }
+            footer .container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .live-grid {
+                gap: 2rem;
+            }
+            .zoom-card {
+                aspect-ratio: 16/9;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(246, 242, 237, 0.97);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+                padding: 2rem;
+            }
+            .nav-links.open {
+                transform: translateX(0);
+            }
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+            .hamburger.open span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            .hamburger.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.open span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+            .hero {
+                padding: 120px 0 60px;
+                min-height: auto;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .testimonial-card {
+                flex: 0 0 280px;
+            }
+            footer .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            footer .socials {
+                justify-content: center;
+            }
+            .modal {
+                padding: 1.8rem 1.2rem;
+            }
+            .live-features {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+            .schedule-item {
+                padding: 0.8rem 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+            .hero-stats strong {
+                font-size: 1.3rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .meditation-video .play-btn {
+                width: 56px;
+                height: 56px;
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── NAV ─── -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-leaf"></i> ZenLife
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#progress">Progress</a></li>
+                <li><a href="#meditation">Meditation</a></li>
+                <li><a href="#live" style="color:var(--blue);font-weight:600;">Live Zoom</a></li>
+                <li><a href="#pricing" class="nav-cta">Join Now</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ─── HERO ─── -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge"><i class="fas fa-spa" style="margin-right:6px;"></i> Mindful Living</span>
+                <h1>Find Your <span>Balance</span> <br />Body &amp; Soul</h1>
+                <p>Transform your life with daily wellness, guided meditation, and mindful movement — all in one serene space.</p>
+                <div class="hero-actions">
+                    <a href="#pricing" class="btn btn-primary"><i class="fas fa-play-circle"></i> Start Free Trial</a>
+                    <a href="#meditation" class="btn btn-outline"><i class="fas fa-video"></i> Watch Meditation</a>
+                </div>
+                <div class="hero-stats">
+                    <div><strong>12K+</strong><span>Active Members</span></div>
+                    <div><strong>4.9★</strong><span>Avg. Rating</span></div>
+                    <div><strong>200+</strong><span>Guided Sessions</span></div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop&crop=center&auto=format" alt="Woman meditating in nature" loading="lazy" />
+                </div>
+                <div class="floating-card"><i class="fas fa-heartbeat"></i> 1,200 cal burned</div>
+                <div class="floating-card"><i class="fas fa-brain"></i> 78% less stress</div>
+                <div class="floating-card"><i class="fas fa-moon"></i> Sleep 9.2h avg.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── FEATURES ─── -->
+    <section class="features" id="features">
+        <div class="container">
+            <span class="badge"><i class="fas fa-star"></i> What We Offer</span>
+            <h2 class="section-title">Wellness, redefined.</h2>
+            <p class="section-sub">Curated practices to nurture your mind, move your body, and restore your spirit.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-yoga"></i></div>
+                    <h3>Yoga &amp; Flow</h3>
+                    <p>Vinyasa, Hatha, and restorative sessions for all levels.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-brain"></i></div>
+                    <h3>Guided Meditation</h3>
+                    <p>Mindfulness practices to reduce anxiety and improve focus.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h3>Live Zoom Circles</h3>
+                    <p>Real-time group sessions for community support and deep relaxation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-dumbbell"></i></div>
+                    <h3>Fitness Training</h3>
+                    <p>High-intensity workouts, strength, and flexibility programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── TESTIMONIALS ─── -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <span class="badge"><i class="fas fa-quote-left"></i> Real Stories</span>
+            <h2 class="section-title">What our community says</h2>
+            <p class="section-sub" style="margin-bottom:1.5rem;">Thousands have found their path to calm. Here's what they share.</p>
+            <div class="testimonial-slider" id="testimonialSlider"></div>
+        </div>
+    </section>
+
+    <!-- ─── PROGRESS TRACKER ─── -->
+    <section class="progress-section" id="progress">
+        <div class="container">
+            <div class="progress-grid">
+                <div class="progress-info">
+                    <span class="badge"><i class="fas fa-chart-line"></i> Your Journey</span>
+                    <h2>Track your <br />wellness progress</h2>
+                    <p>Stay motivated with real-time insights on your daily habits, mindfulness, and fitness goals.</p>
+                    <div class="progress-item">
+                        <div class="label"><span>Mindfulness</span><span id="mindfulnessLabel">72%</span></div>
+                        <div class="progress-track"><div class="fill" id="mindfulnessFill" style="width:72%;"></div></div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="label"><span>Physical Activity</span><span id="activityLabel">58%</span></div>
+                        <div class="progress-track"><div class="fill" id="activityFill" style="width:58%;"></div></div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="label"><span>Sleep Quality</span><span id="sleepLabel">84%</span></div>
+                        <div class="progress-track"><div class="fill" id="sleepFill" style="width:84%;"></div></div>
+                    </div>
+                    <button class="btn btn-green" id="refreshProgress" style="margin-top:0.5rem;"><i class="fas fa-sync-alt"></i> Refresh Stats</button>
+                </div>
+                <div class="progress-visual">
+                    <div class="ring-wrap">
+                        <svg viewBox="0 0 200 200">
+                            <circle class="bg" cx="100" cy="100" r="90" />
+                            <circle class="progress-ring" id="progressRing" cx="100" cy="100" r="90" />
+                        </svg>
+                        <div class="ring-center">
+                            <strong id="overallPercent">71%</strong>
+                            <span>Overall Wellness</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── GUIDED MEDITATION ─── -->
+    <section class="meditation" id="meditation">
+        <div class="container">
+            <div class="meditation-grid">
+                <div class="meditation-video" id="meditationVideo">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=450&fit=crop&crop=center&auto=format" alt="Meditation session" class="video-placeholder" loading="lazy" />
+                    <div class="play-btn" id="playMeditation"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="meditation-text">
+                    <span class="badge"><i class="fas fa-headphones"></i> Audio &amp; Video</span>
+                    <h2>Guided Meditation <br />for inner peace</h2>
+                    <p>Join our 10-minute daily sessions led by expert instructors. Calm your mind, reduce stress, and reconnect with yourself.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 10–30 minute sessions</li>
+                        <li><i class="fas fa-check-circle"></i> Breathwork &amp; visualization</li>
+                        <li><i class="fas fa-check-circle"></i> New content every week</li>
+                    </ul>
+                    <a href="#pricing" class="btn btn-primary" style="margin-top:1.5rem;"><i class="fas fa-play-circle"></i> Start Your Session</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── LIVE ZOOM SESSIONS ─── -->
+    <section class="live-sessions" id="live">
+        <div class="container">
+            <span class="badge"><i class="fas fa-video"></i> Live & Interactive</span>
+            <h2 class="section-title">Weekly Zoom Wellness Circles</h2>
+            <p class="section-sub">Connect in real-time with expert instructors and a supportive community for guided relaxation and mindful conversations.</p>
+            <div class="live-grid">
+                <div class="live-info">
+                    <div class="schedule-item">
+                        <i class="fas fa-calendar-day"></i>
+                        <div><strong>Mindful Mondays</strong><span>7:00 PM EST · Breathwork & Intention</span></div>
+                    </div>
+                    <div class="schedule-item">
+                        <i class="fas fa-calendar-day"></i>
+                        <div><strong>Wellness Wednesdays</strong><span>8:00 PM EST · Guided Meditation & Journaling</span></div>
+                    </div>
+                    <div class="schedule-item">
+                        <i class="fas fa-calendar-day"></i>
+                        <div><strong>Freedom Fridays</strong><span>6:00 PM EST · Community Sharing & Relaxation</span></div>
+                    </div>
+                    <div class="live-features">
+                        <span><i class="fas fa-check-circle"></i> Led by certified instructors</span>
+                        <span><i class="fas fa-check-circle"></i> Recordings available for members</span>
+                        <span><i class="fas fa-check-circle"></i> Ask questions & share in real-time</span>
+                    </div>
+                    <button class="btn btn-primary open-payment" data-plan="Premium" data-price="39">
+                        <i class="fas fa-users"></i> Join a Session Today
+                    </button>
+                    <div class="delivery-note">
+                        <i class="fas fa-envelope"></i> <i class="fab fa-whatsapp"></i>
+                        <span>Zoom link sent via Gmail &amp; WhatsApp after subscription</span>
+                    </div>
+                </div>
+                <div class="live-visual">
+                    <div class="zoom-card" id="zoomCard">
+                        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&h=600&fit=crop&crop=center&auto=format" alt="Zoom wellness meeting" loading="lazy" />
+                        <div class="live-badge"><i class="fas fa-circle" style="color:#ff4d4d;font-size:0.7rem;margin-right:6px;"></i> LIVE NOW</div>
+                        <div class="zoom-overlay" id="zoomOverlay">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Join Zoom Meeting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PRICING / PAYMENT ─── -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <span class="badge"><i class="fas fa-lock"></i> Secure Plans</span>
+            <h2 class="section-title">Choose your wellness path</h2>
+            <p class="section-sub">Flexible subscriptions with a 7-day free trial. Cancel anytime.</p>
+            <div class="pricing-grid">
+                <!-- Starter -->
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$19 <span>/mo</span></div>
+                    <p class="desc">Essential wellness tools to begin your journey.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 10 guided meditations</li>
+                        <li><i class="fas fa-check"></i> Basic yoga flows</li>
+                        <li><i class="fas fa-check"></i> Progress tracking</li>
+                        <li><i class="fas fa-check"></i> Community access</li>
+                    </ul>
+                    <button class="btn btn-outline open-payment" data-plan="Starter" data-price="19">Get Started</button>
+                </div>
+                <!-- Premium (featured) -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price">$39 <span>/mo</span></div>
+                    <p class="desc">Full access to all content, live sessions &amp; coaching.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Unlimited meditations</li>
+                        <li><i class="fas fa-check"></i> Live yoga &amp; fitness classes</li>
+                        <li><i class="fas fa-check"></i> <strong>Weekly Live Zoom Circles</strong></li>
+                        <li><i class="fas fa-check"></i> Personalized wellness plan</li>
+                        <li><i class="fas fa-check"></i> 1-on-1 coaching session</li>
+                        <li><i class="fas fa-check"></i> Offline downloads</li>
+                    </ul>
+                    <button class="btn btn-primary open-payment" data-plan="Premium" data-price="39">Start Free Trial</button>
+                </div>
+                <!-- Family -->
+                <div class="pricing-card">
+                    <h3>Family</h3>
+                    <div class="price">$59 <span>/mo</span></div>
+                    <p class="desc">Up to 5 members, perfect for the whole household.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Everything in Premium</li>
+                        <li><i class="fas fa-check"></i> 5 individual profiles</li>
+                        <li><i class="fas fa-check"></i> Family progress hub</li>
+                        <li><i class="fas fa-check"></i> Kids mindfulness content</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                    </ul>
+                    <button class="btn btn-outline open-payment" data-plan="Family" data-price="59">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PAYMENT MODAL (PayU integrated) ─── -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h2>Secure Checkout</h2>
+            <p id="modalPlan">Subscribe to <strong>Premium</strong> — $39/month</p>
+            <form id="paymentForm" novalidate>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="John Doe" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="john@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="phone">WhatsApp Number</label>
+                    <input type="tel" id="phone" placeholder="+91 98765 43210" required />
+                </div>
+                <div class="payu-badge">
+                    <i class="fas fa-shield-alt" style="color:#1a2a3a;"></i>
+                    <span>Secured by <strong>PayU</strong> — 256-bit encryption</span>
+                </div>
+                <button type="submit" class="btn" style="background:#1a2a3a;">
+                    <i class="fas fa-credit-card"></i> Pay with PayU
+                </button>
+                <div class="secure-badge">
+                    <i class="fas fa-lock"></i> Your data is safe &amp; encrypted
+                </div>
+                <div style="font-size:0.8rem;color:var(--text-light);text-align:center;margin-top:0.8rem;border-top:1px solid var(--neutral-dark);padding-top:0.8rem;">
+                    <i class="fas fa-envelope"></i> <i class="fab fa-whatsapp"></i> Zoom link sent via email &amp; WhatsApp
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ─── FOOTER ─── -->
+    <footer>
+        <div class="container">
+            <div>
+                <a href="#" class="logo" style="color:#fff;font-size:1.6rem;margin-bottom:0.5rem;display:inline-block;">
+                    <i class="fas fa-leaf"></i> ZenLife
+                </a>
+                <p style="max-width:280px;font-size:0.9rem;">Nurture your mind, move your body, find your peace.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-spotify"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#meditation">Meditation</a></li>
+                    <li><a href="#live">Live Zoom</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Join Us</h4>
+                <ul>
+                    <li><a href="#pricing">Membership</a></li>
+                    <li><a href="#">Refer a Friend</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                &copy; 2026 ZenLife Wellness. All rights reserved. Made with <i class="fas fa-heart" style="color:var(--blue);"></i> for calm.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ─── JAVASCRIPT ─── -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ─── Nav Toggle ───
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                navLinks.classList.toggle('open');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('open');
+                    navLinks.classList.remove('open');
+                });
+            });
+
+            // ─── Testimonials ───
+            const testimonials = [{
+                name: 'Sarah M.',
+                avatar: 'SM',
+                text: 'ZenLife completely transformed my morning routine. I feel more focused and calm throughout the day.',
+                rating: 5
+            }, {
+                name: 'James K.',
+                avatar: 'JK',
+                text: 'The yoga flows are incredible. I have gained so much strength and flexibility in just 6 weeks.',
+                rating: 5
+            }, {
+                name: 'Priya R.',
+                avatar: 'PR',
+                text: 'Guided meditations helped me manage my anxiety. This is the best investment in my well-being.',
+                rating: 5
+            }, {
+                name: 'Alex T.',
+                avatar: 'AT',
+                text: 'I love the variety — from intense workouts to soothing meditations. Everything in one place.',
+                rating: 4
+            }, {
+                name: 'Maya L.',
+                avatar: 'ML',
+                text: 'The progress tracker keeps me accountable. I am sleeping better and feeling more energetic.',
+                rating: 5
+            }];
+            const slider = document.getElementById('testimonialSlider');
+            testimonials.forEach(t => {
+                const card = document.createElement('div');
+                card.className = 'testimonial-card';
+                const stars = '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating);
+                card.innerHTML = `
+              <div class="stars">${stars}</div>
+              <blockquote>“${t.text}”</blockquote>
+              <div class="author">
+                <div class="avatar">${t.avatar}</div>
+                <div>${t.name} <span>• verified member</span></div>
+              </div>
+            `;
+                slider.appendChild(card);
+            });
+            // duplicate for seamless scroll
+            testimonials.forEach(t => {
+                const card = document.createElement('div');
+                card.className = 'testimonial-card';
+                const stars = '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating);
+                card.innerHTML = `
+              <div class="stars">${stars}</div>
+              <blockquote>“${t.text}”</blockquote>
+              <div class="author">
+                <div class="avatar">${t.avatar}</div>
+                <div>${t.name} <span>• verified member</span></div>
+              </div>
+            `;
+                slider.appendChild(card);
+            });
+
+            // ─── Progress Tracker ───
+            const mindfulnessFill = document.getElementById('mindfulnessFill');
+            const activityFill = document.getElementById('activityFill');
+            const sleepFill = document.getElementById('sleepFill');
+            const mindfulnessLabel = document.getElementById('mindfulnessLabel');
+            const activityLabel = document.getElementById('activityLabel');
+            const sleepLabel = document.getElementById('sleepLabel');
+            const overallPercent = document.getElementById('overallPercent');
+            const progressRing = document.getElementById('progressRing');
+            const CIRCUMFERENCE = 565.48;
+
+            function updateProgress(mind, act, sleep) {
+                const m = Math.min(100, Math.max(0, mind));
+                const a = Math.min(100, Math.max(0, act));
+                const s = Math.min(100, Math.max(0, sleep));
+                mindfulnessFill.style.width = m + '%';
+                activityFill.style.width = a + '%';
+                sleepFill.style.width = s + '%';
+                mindfulnessLabel.textContent = m + '%';
+                activityLabel.textContent = a + '%';
+                sleepLabel.textContent = s + '%';
+                const avg = Math.round((m + a + s) / 3);
+                overallPercent.textContent = avg + '%';
+                const offset = CIRCUMFERENCE - (avg / 100) * CIRCUMFERENCE;
+                progressRing.style.strokeDashoffset = offset;
+            }
+
+            function randomProgress() {
+                const m = Math.round(60 + Math.random() * 35);
+                const a = Math.round(45 + Math.random() * 40);
+                const s = Math.round(65 + Math.random() * 30);
+                updateProgress(m, a, s);
+            }
+            document.getElementById('refreshProgress').addEventListener('click', randomProgress);
+            setTimeout(randomProgress, 600);
+
+            // ─── Meditation Video Play ───
+            const playBtn = document.getElementById('playMeditation');
+            const videoContainer = document.getElementById('meditationVideo');
+            let isPlaying = false;
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!isPlaying) {
+                    const existingImg = videoContainer.querySelector('.video-placeholder');
+                    if (existingImg) existingImg.style.opacity = '0.4';
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    playBtn.style.background = 'rgba(107, 181, 217, 0.6)';
+                    isPlaying = true;
+                    const msg = document.createElement('div');
+                    msg.style.cssText =
+                        'position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:#fff;padding:6px 18px;border-radius:60px;font-size:0.8rem;pointer-events:none;';
+                    msg.textContent = '🎵 Meditation session playing...';
+                    msg.id = 'meditationMsg';
+                    const oldMsg = document.getElementById('meditationMsg');
+                    if (oldMsg) oldMsg.remove();
+                    videoContainer.appendChild(msg);
+                } else {
+                    const img = videoContainer.querySelector('.video-placeholder');
+                    if (img) img.style.opacity = '0.7';
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    playBtn.style.background = 'rgba(255,255,255,0.2)';
+                    isPlaying = false;
+                    const oldMsg = document.getElementById('meditationMsg');
+                    if (oldMsg) oldMsg.remove();
+                }
+            });
+            videoContainer.addEventListener('click', function(e) {
+                if (e.target.closest('.play-btn')) return;
+                playBtn.click();
+            });
+
+            // ─── Zoom Card Interaction ───
+            const zoomOverlay = document.getElementById('zoomOverlay');
+            const zoomCard = document.getElementById('zoomCard');
+            zoomOverlay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert(
+                    '🌿 You are joining the Live Zoom Wellness Circle!\n\n🔗 A secure Zoom link will be sent to your email and WhatsApp after subscription.\n\n💡 Upgrade to Premium to access all live sessions.');
+            });
+            zoomCard.addEventListener('click', function(e) {
+                if (e.target.closest('.zoom-overlay')) return;
+                zoomOverlay.click();
+            });
+
+            // ─── Payment Modal (PayU integration) ───
+            const modal = document.getElementById('paymentModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalPlan = document.getElementById('modalPlan');
+            const paymentForm = document.getElementById('paymentForm');
+
+            document.querySelectorAll('.open-payment').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const plan = this.dataset.plan;
+                    const price = this.dataset.price;
+                    modalPlan.innerHTML = `Subscribe to <strong>${plan}</strong> — $${price}/month`;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function closeModalFn() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            closeModal.addEventListener('click', closeModalFn);
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) closeModalFn();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModalFn();
+            });
+
+            // ─── Payment Form Submit (simulate PayU redirect) ───
+            paymentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('fullName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+
+                if (!name || !email || !phone) {
+                    alert('Please fill in all fields (Name, Email, WhatsApp).');
+                    return;
+                }
+                if (!email.includes('@')) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
+                const btn = paymentForm.querySelector('.btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting to PayU...';
+                btn.disabled = true;
+
+                // Simulate PayU redirect and success
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Payment Successful!';
+                    btn.style.background = '#72a888';
+                    setTimeout(() => {
+                        closeModalFn();
+                        btn.innerHTML = originalText;
+                        btn.style.background = '#1a2a3a';
+                        btn.disabled = false;
+                        paymentForm.reset();
+                        alert(
+                            '🎉 Welcome to ZenLife! Your subscription is active.\n\n📧 A Zoom meeting link has been sent to your email.\n📱 You will also receive it on WhatsApp.\n\nStart your wellness journey today!');
+                    }, 1500);
+                }, 2000);
+            });
+
+            // ─── Nav background on scroll ───
+            const nav = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    nav.style.background = 'rgba(246, 242, 237, 0.92)';
+                    nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.04)';
+                } else {
+                    nav.style.background = 'rgba(246, 242, 237, 0.75)';
+                    nav.style.boxShadow = 'none';
+                }
+            });
+
+        })();
+    </script>
+</body>
+</html>
