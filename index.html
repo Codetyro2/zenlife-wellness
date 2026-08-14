@@ -1,1751 +1,716 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZenLife — Wellness & Mind Relaxation</title>
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <style>
-        /* ─── Reset & Base ─── (unchanged) */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        :root {
-            --blue: #6bb5d9;
-            --blue-dark: #4a9bbf;
-            --green: #9bc9b0;
-            --green-dark: #72a888;
-            --neutral: #f6f2ed;
-            --neutral-dark: #e3dbd2;
-            --text: #2d3e40;
-            --text-light: #5a6f72;
-            --white: #ffffff;
-            --shadow: 0 12px 40px rgba(45, 62, 64, 0.10);
-            --radius: 24px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: "Inter", sans-serif;
-            background: var(--neutral);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        img {
-            max-width: 100%;
-            display: block;
-            border-radius: var(--radius);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        .section-title {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-        }
-        .section-sub {
-            color: var(--text-light);
-            font-size: 1.15rem;
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.9rem 2.2rem;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            background: var(--white);
-            color: var(--text);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-        }
-        .btn-primary {
-            background: var(--blue);
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(107, 181, 217, 0.35);
-        }
-        .btn-primary:hover {
-            background: var(--blue-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(107, 181, 217, 0.45);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--blue);
-            color: var(--blue);
-        }
-        .btn-outline:hover {
-            background: var(--blue);
-            color: #fff;
-            transform: translateY(-3px);
-        }
-        .btn-green {
-            background: var(--green);
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(155, 201, 176, 0.35);
-        }
-        .btn-green:hover {
-            background: var(--green-dark);
-            transform: translateY(-3px);
-        }
-        .badge {
-            display: inline-block;
-            background: rgba(107, 181, 217, 0.15);
-            color: var(--blue-dark);
-            font-weight: 600;
-            font-size: 0.8rem;
-            padding: 0.3rem 1rem;
-            border-radius: 60px;
-            letter-spacing: 0.02em;
-            margin-bottom: 1rem;
-        }
-        /* ─── Nav ─── */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 0;
-            background: rgba(246, 242, 237, 0.75);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            transition: var(--transition);
-        }
-        nav .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: -0.02em;
-        }
-        .logo i {
-            color: var(--blue);
-            font-size: 1.8rem;
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            list-style: none;
-        }
-        .nav-links a {
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: var(--text-light);
-            transition: var(--transition);
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--blue);
-            transition: var(--transition);
-        }
-        .nav-links a:hover {
-            color: var(--text);
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        .nav-cta {
-            background: var(--blue);
-            color: #fff !important;
-            padding: 0.5rem 1.5rem;
-            border-radius: 60px;
-            font-weight: 600;
-        }
-        .nav-cta::after {
-            display: none !important;
-        }
-        .nav-cta:hover {
-            background: var(--blue-dark);
-            color: #fff !important;
-        }
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 4px;
-        }
-        .hamburger span {
-            width: 28px;
-            height: 3px;
-            background: var(--text);
-            border-radius: 6px;
-            transition: var(--transition);
-        }
-        /* ─── Hero ─── */
-        .hero {
-            padding: 140px 0 80px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(145deg, #f6f2ed 0%, #eaf0ec 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            right: -10%;
-            top: -20%;
-            width: 60%;
-            height: 140%;
-            background: radial-gradient(ellipse at 70% 40%, rgba(107, 181, 217, 0.12), transparent 70%);
-            pointer-events: none;
-        }
-        .hero .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-        .hero-content h1 {
-            font-size: clamp(2.8rem, 6vw, 4.4rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            margin-bottom: 1.2rem;
-        }
-        .hero-content h1 span {
-            color: var(--blue);
-            position: relative;
-        }
-        .hero-content h1 span::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: rgba(107, 181, 217, 0.2);
-            border-radius: 6px;
-        }
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            max-width: 480px;
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-        }
-        .hero-stats {
-            display: flex;
-            gap: 2.5rem;
-            padding-top: 1rem;
-            border-top: 2px solid rgba(45, 62, 64, 0.06);
-        }
-        .hero-stats div {
-            text-align: left;
-        }
-        .hero-stats strong {
-            display: block;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-        .hero-stats span {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-        .hero-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        .hero-image .img-wrapper {
-            width: 100%;
-            max-width: 520px;
-            aspect-ratio: 4/3;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            background: #d9e4df;
-            position: relative;
-        }
-        .hero-image .img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .floating-card {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 0.8rem 1.4rem;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            animation: float 6s ease-in-out infinite;
-        }
-        .floating-card i {
-            color: var(--green);
-            font-size: 1.2rem;
-        }
-        .floating-card:nth-child(2) {
-            top: 10%;
-            right: -8%;
-            animation-delay: 1s;
-        }
-        .floating-card:nth-child(3) {
-            bottom: 18%;
-            left: -10%;
-            animation-delay: 2s;
-        }
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-12px);
-            }
-        }
-        /* ─── Features ─── */
-        .features {
-            padding: 80px 0;
-            background: var(--white);
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .feature-card {
-            background: var(--neutral);
-            padding: 2rem 1.8rem;
-            border-radius: var(--radius);
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--blue);
-            box-shadow: var(--shadow);
-        }
-        .feature-card .icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(107, 181, 217, 0.12);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            color: var(--blue);
-            margin-bottom: 1.2rem;
-        }
-        .feature-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-        }
-        .feature-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-        /* ─── Testimonials ─── */
-        .testimonials {
-            padding: 80px 0;
-            background: var(--neutral);
-        }
-        .testimonials .section-sub {
-            margin-bottom: 1rem;
-        }
-        .testimonial-slider {
-            display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            padding: 1rem 0.25rem 2rem;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-        .testimonial-slider::-webkit-scrollbar {
-            display: none;
-        }
-        .testimonial-card {
-            flex: 0 0 320px;
-            background: var(--white);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            scroll-snap-align: start;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        .testimonial-card:hover {
-            transform: scale(1.02);
-        }
-        .testimonial-card .stars {
-            color: #f5b342;
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-            letter-spacing: 2px;
-        }
-        .testimonial-card blockquote {
-            font-size: 1rem;
-            font-weight: 500;
-            line-height: 1.6;
-            margin-bottom: 1.2rem;
-            color: var(--text);
-        }
-        .testimonial-card .author {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        .testimonial-card .author .avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-        .testimonial-card .author div {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        .testimonial-card .author span {
-            font-weight: 400;
-            color: var(--text-light);
-            font-size: 0.8rem;
-        }
-        /* ─── Progress Tracker ─── */
-        .progress-section {
-            padding: 80px 0;
-            background: var(--white);
-        }
-        .progress-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        .progress-info h2 {
-            font-size: clamp(1.8rem, 3vw, 2.6rem);
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-        }
-        .progress-info p {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-        .progress-item {
-            margin-bottom: 1.6rem;
-        }
-        .progress-item .label {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 0.3rem;
-        }
-        .progress-track {
-            height: 8px;
-            background: var(--neutral-dark);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        .progress-track .fill {
-            height: 100%;
-            border-radius: 12px;
-            background: linear-gradient(90deg, var(--blue), var(--green));
-            width: 0%;
-            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .progress-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .progress-visual .ring-wrap {
-            position: relative;
-            width: 220px;
-            height: 220px;
-        }
-        .progress-visual .ring-wrap svg {
-            transform: rotate(-90deg);
-            width: 220px;
-            height: 220px;
-        }
-        .progress-visual .ring-wrap circle {
-            fill: none;
-            stroke-width: 10;
-            stroke-linecap: round;
-        }
-        .progress-visual .ring-wrap .bg {
-            stroke: var(--neutral-dark);
-        }
-        .progress-visual .ring-wrap .progress-ring {
-            stroke: var(--blue);
-            stroke-dasharray: 565.48;
-            stroke-dashoffset: 565.48;
-            transition: stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .progress-visual .ring-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-        .progress-visual .ring-center strong {
-            display: block;
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--text);
-        }
-        .progress-visual .ring-center span {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-        /* ─── Guided Meditation ─── */
-        .meditation {
-            padding: 80px 0;
-            background: linear-gradient(145deg, #eaf0ec, #f6f2ed);
-        }
-        .meditation-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        .meditation-video {
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            background: #1a2a2a;
-            aspect-ratio: 16/9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-        }
-        .meditation-video .play-btn {
-            width: 72px;
-            height: 72px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: #fff;
-            transition: var(--transition);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        .meditation-video:hover .play-btn {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-        .meditation-video .video-placeholder {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-        }
-        .meditation-text h2 {
-            font-size: clamp(1.8rem, 3vw, 2.6rem);
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-        }
-        .meditation-text p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-        .meditation-text ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-        .meditation-text ul li {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-weight: 500;
-        }
-        .meditation-text ul li i {
-            color: var(--green);
-            font-size: 1.2rem;
-            width: 24px;
-        }
-        /* ─── LIVE ZOOM SESSIONS ─── */
-        .live-sessions {
-            padding: 80px 0;
-            background: var(--white);
-        }
-        .live-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        .schedule-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.2rem;
-            background: var(--neutral);
-            padding: 1rem 1.5rem;
-            border-radius: 16px;
-            margin-bottom: 1rem;
-            transition: var(--transition);
-            border-left: 4px solid var(--blue);
-        }
-        .schedule-item:hover {
-            transform: translateX(6px);
-            box-shadow: var(--shadow);
-        }
-        .schedule-item i {
-            font-size: 1.4rem;
-            color: var(--blue);
-            margin-top: 2px;
-            width: 28px;
-            text-align: center;
-        }
-        .schedule-item div strong {
-            display: block;
-            font-weight: 700;
-            font-size: 1.05rem;
-        }
-        .schedule-item div span {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-        .live-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem 1.8rem;
-            margin: 1.8rem 0 2rem;
-            padding: 1rem 0;
-            border-top: 2px solid var(--neutral-dark);
-            border-bottom: 2px solid var(--neutral-dark);
-        }
-        .live-features span {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        .live-features span i {
-            color: var(--green);
-        }
-        .zoom-card {
-            position: relative;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            background: #d9e4df;
-            aspect-ratio: 4/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .zoom-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        .zoom-card:hover img {
-            transform: scale(1.05);
-        }
-        .live-badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
-            padding: 0.4rem 1rem;
-            border-radius: 60px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            animation: pulse-badge 2s infinite;
-        }
-        @keyframes pulse-badge {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-            }
-        }
-        .zoom-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(45, 62, 64, 0.3);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: var(--transition);
-            cursor: pointer;
-            color: #fff;
-        }
-        .zoom-card:hover .zoom-overlay {
-            opacity: 1;
-        }
-        .zoom-overlay i {
-            font-size: 3.5rem;
-            margin-bottom: 0.6rem;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        .zoom-overlay span {
-            font-weight: 600;
-            font-size: 1.1rem;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.4rem 1.8rem;
-            border-radius: 60px;
-            backdrop-filter: blur(4px);
-        }
-        .delivery-note {
-            background: var(--neutral);
-            padding: 0.8rem 1.2rem;
-            border-radius: 60px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            color: var(--text-light);
-        }
-        .delivery-note i {
-            color: var(--blue);
-            font-size: 1.1rem;
-        }
-        /* ─── Pricing / Payment ─── */
-        .pricing {
-            padding: 80px 0;
-            background: var(--neutral);
-        }
-        .pricing .section-sub {
-            margin-bottom: 3rem;
-        }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        .pricing-card {
-            background: var(--white);
-            padding: 2.5rem 2rem;
-            border-radius: var(--radius);
-            transition: var(--transition);
-            border: 2px solid transparent;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-        }
-        .pricing-card.featured {
-            border-color: var(--blue);
-            background: var(--white);
-            box-shadow: var(--shadow);
-        }
-        .pricing-card.featured .pricing-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--blue);
-            color: #fff;
-            padding: 0.2rem 1.4rem;
-            border-radius: 60px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.03em;
-        }
-        .pricing-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        .pricing-card .price {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--text);
-            margin: 0.5rem 0 0.2rem;
-        }
-        .pricing-card .price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-light);
-        }
-        .pricing-card .desc {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-        .pricing-card ul {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-        .pricing-card ul li {
-            padding: 0.4rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.95rem;
-        }
-        .pricing-card ul li i {
-            color: var(--green);
-            font-size: 1rem;
-            width: 20px;
-        }
-        .pricing-card .btn {
-            width: 100%;
-            justify-content: center;
-        }
-        /* ─── Payment Modal (PayU style) ─── */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-            padding: 24px;
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        .modal {
-            background: var(--white);
-            max-width: 480px;
-            width: 100%;
-            border-radius: var(--radius);
-            padding: 2.5rem 2rem;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
-            transform: translateY(30px) scale(0.96);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .modal-overlay.active .modal {
-            transform: translateY(0) scale(1);
-        }
-        .modal .close-modal {
-            float: right;
-            background: none;
-            border: none;
-            font-size: 1.6rem;
-            cursor: pointer;
-            color: var(--text-light);
-            transition: var(--transition);
-        }
-        .modal .close-modal:hover {
-            color: var(--text);
-            transform: rotate(90deg);
-        }
-        .modal h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        .modal p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-        .modal .form-group {
-            margin-bottom: 1.2rem;
-        }
-        .modal .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 0.3rem;
-        }
-        .modal .form-group input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid var(--neutral-dark);
-            border-radius: 16px;
-            font-size: 1rem;
-            transition: var(--transition);
-            background: var(--neutral);
-        }
-        .modal .form-group input:focus {
-            outline: none;
-            border-color: var(--blue);
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(107, 181, 217, 0.15);
-        }
-        .modal .payu-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            background: #f2f6fc;
-            padding: 0.6rem;
-            border-radius: 12px;
-            margin: 1rem 0 0.5rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-        .modal .payu-badge img {
-            height: 24px;
-            width: auto;
-        }
-        .modal .secure-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 0.8rem;
-            justify-content: center;
-        }
-        .modal .secure-badge i {
-            color: var(--green);
-        }
-        .modal .btn {
-            width: 100%;
-            justify-content: center;
-            margin-top: 0.5rem;
-            padding: 1rem;
-            background: #1a2a3a;
-            color: #fff;
-            border: none;
-        }
-        .modal .btn:hover {
-            background: #0f1a26;
-            transform: translateY(-2px);
-        }
-        .modal .btn i {
-            margin-right: 0.5rem;
-        }
-        /* ─── Footer ─── */
-        footer {
-            background: var(--text);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 3rem 0 1.5rem;
-        }
-        footer .container {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 2rem;
-        }
-        footer h4 {
-            color: #fff;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-        }
-        footer ul {
-            list-style: none;
-        }
-        footer ul li {
-            margin-bottom: 0.4rem;
-        }
-        footer ul a {
-            transition: var(--transition);
-        }
-        footer ul a:hover {
-            color: #fff;
-        }
-        footer .socials {
-            display: flex;
-            gap: 1rem;
-            margin-top: 0.8rem;
-        }
-        footer .socials a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            color: rgba(255, 255, 255, 0.6);
-        }
-        footer .socials a:hover {
-            background: var(--blue);
-            color: #fff;
-            transform: translateY(-3px);
-        }
-        footer .copyright {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 0.85rem;
-            margin-top: 1rem;
-        }
-        /* ─── Responsive ─── */
-        @media (max-width: 992px) {
-            .hero .container,
-            .live-grid,
-            .progress-grid,
-            .meditation-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-content p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-actions {
-                justify-content: center;
-            }
-            .hero-stats {
-                justify-content: center;
-            }
-            .hero-image .img-wrapper {
-                max-width: 420px;
-                margin: 0 auto;
-            }
-            .floating-card {
-                display: none;
-            }
-            .progress-visual .ring-wrap {
-                margin: 0 auto;
-            }
-            footer .container {
-                grid-template-columns: 1fr 1fr;
-            }
-            .live-grid {
-                gap: 2rem;
-            }
-            .zoom-card {
-                aspect-ratio: 16/9;
-            }
-        }
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(246, 242, 237, 0.97);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: center;
-                gap: 2rem;
-                transform: translateX(100%);
-                transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-                padding: 2rem;
-            }
-            .nav-links.open {
-                transform: translateX(0);
-            }
-            .hamburger {
-                display: flex;
-                z-index: 1001;
-            }
-            .hamburger.open span:nth-child(1) {
-                transform: rotate(45deg) translate(6px, 6px);
-            }
-            .hamburger.open span:nth-child(2) {
-                opacity: 0;
-            }
-            .hamburger.open span:nth-child(3) {
-                transform: rotate(-45deg) translate(6px, -6px);
-            }
-            .hero {
-                padding: 120px 0 60px;
-                min-height: auto;
-            }
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-            .testimonial-card {
-                flex: 0 0 280px;
-            }
-            footer .container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            footer .socials {
-                justify-content: center;
-            }
-            .modal {
-                padding: 1.8rem 1.2rem;
-            }
-            .live-features {
-                flex-direction: column;
-                gap: 0.6rem;
-            }
-            .schedule-item {
-                padding: 0.8rem 1rem;
-            }
-        }
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-            .hero-stats {
-                flex-wrap: wrap;
-                gap: 1.5rem;
-            }
-            .hero-stats strong {
-                font-size: 1.3rem;
-            }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            .meditation-video .play-btn {
-                width: 56px;
-                height: 56px;
-                font-size: 1.4rem;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZenLife — Wellness &amp; Mind Relaxation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+/* ── Tokens ─────────────────────────────────────────────── */
+:root{
+  --color-bg:#161826; --color-surface:#232532; --color-text:#e9e9ed;
+  --color-accent:#9184d9; --color-divider:color-mix(in srgb,#e9e9ed 16%,transparent);
+  --color-neutral-300:#cfd3e5; --color-neutral-400:#b2b6ca; --color-neutral-500:#9397ab;
+  --color-neutral-600:#75798c; --color-neutral-800:#3f424d; --color-neutral-900:#292b31;
+  --color-accent-100:#f5f4ff; --color-accent-200:#e7e5fe; --color-accent-300:#d2cefd;
+  --color-accent-400:#b5abfc; --color-accent-600:#796cbf; --color-accent-700:#5d5294;
+  --color-accent-800:#423a6a; --color-accent-900:#2b2741;
+  --color-section:#262a60; --color-section-glow:#353b80;
+  --font-heading:"Inter",system-ui,sans-serif; --font-body:"Inter",system-ui,sans-serif;
+  --radius-sm:4px; --radius-md:8px; --radius-lg:14px;
+  --shadow-sm:0 0 0 1px #3f424d;
+  --shadow-md:0 0 0 1px #595d6c,0 6px 18px rgba(0,0,0,.55);
+  --shadow-lg:0 0 0 1px #9397ab,0 16px 40px rgba(0,0,0,.65);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:15px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:var(--font-heading);font-weight:500;letter-spacing:-.03em;margin:0}
+img{display:block;max-width:100%}
+a{color:var(--color-accent-300);text-decoration:none}
+a:hover{color:var(--color-accent-200)}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+::selection{background:color-mix(in srgb,var(--color-accent) 30%,transparent)}
+
+/* ── Design-system components ───────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;text-decoration:none;
+  font-family:var(--font-heading);font-weight:500;font-size:14px;line-height:1.2;color:var(--color-text);
+  background:transparent;border:1px solid transparent;padding:6px 10px;border-radius:var(--radius-md)}
+.btn-primary{color:var(--color-accent);border-color:var(--color-accent)}
+.btn-primary:hover{background:color-mix(in srgb,var(--color-accent) 12%,transparent)}
+.btn-primary:active{background:color-mix(in srgb,var(--color-accent) 22%,transparent)}
+.btn-secondary{border-color:var(--color-divider)}
+.btn-secondary:hover{background:color-mix(in srgb,var(--color-text) 7%,transparent)}
+.btn-ghost{color:var(--color-accent)}
+.btn-ghost:hover{background:color-mix(in srgb,var(--color-accent) 10%,transparent)}
+.btn-icon{width:36px;height:36px;padding:0;border-color:var(--color-divider);color:var(--color-accent)}
+.btn-icon:hover{background:color-mix(in srgb,var(--color-accent) 10%,transparent)}
+.btn-block{width:100%}
+.tag{display:inline-flex;align-items:center;font-size:11px;letter-spacing:.02em;padding:3px 10px;border-radius:6px}
+.tag-accent{background:var(--color-accent-800);color:var(--color-accent-100)}
+.tag-outline{border:1px solid var(--color-accent);color:var(--color-accent)}
+.card{display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:var(--radius-md);background:var(--color-surface)}
+.card-title{font-family:var(--font-heading);font-weight:500;line-height:1.2}
+.elev-sm{box-shadow:var(--shadow-sm)}.elev-md{box-shadow:var(--shadow-md)}
+.field>label{display:block;font-size:12px;margin-bottom:5px;color:color-mix(in srgb,var(--color-text) 70%,transparent)}
+.input{width:100%;min-height:36px;padding:6px 10px;font:inherit;font-size:14px;color:var(--color-text);
+  caret-color:var(--color-accent);background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md)}
+.input:hover{border-color:color-mix(in srgb,var(--color-text) 45%,transparent)}
+.input:focus-visible{border-color:var(--color-accent);outline-offset:0}
+.dialog{width:min(430px,100%);padding:28px;border-radius:var(--radius-lg);background:var(--color-surface);box-shadow:var(--shadow-lg)}
+.dialog-title{font-family:var(--font-heading);font-weight:500;font-size:21px}
+.lighten{mix-blend-mode:lighten;background-color:transparent}
+
+/* ── Page ───────────────────────────────────────────────── */
+.wrap{max-width:1180px;margin:0 auto}
+section{padding:86px 28px}
+.eyebrow-h2{font-size:clamp(30px,3.6vw,44px);margin:16px 0 10px}
+.lede{color:var(--color-neutral-400);margin:0 0 34px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+
+nav.site{position:fixed;top:0;left:0;right:0;z-index:60;backdrop-filter:blur(14px);
+  background:color-mix(in srgb,#161826 82%,transparent);border-bottom:1px solid var(--color-divider)}
+nav.site .row{max-width:1180px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;gap:9px;color:var(--color-text);font-size:19px;font-weight:600;letter-spacing:-.02em}
+.brand .mark{width:26px;height:26px;border-radius:50%;border:1px solid var(--color-accent);display:grid;place-items:center;
+  box-shadow:0 0 16px color-mix(in srgb,#9184d9 45%,transparent)}
+.navlinks{display:flex;align-items:center;gap:22px;font-size:14px}
+.navlinks a{color:var(--color-neutral-400);transition:color .2s}
+.navlinks a:hover,.navlinks a.active{color:var(--color-accent-300)}
+#progressbar{height:2px;width:0;background:linear-gradient(90deg,var(--color-accent),#a7a1db)}
+
+#top{padding:150px 28px 90px;position:relative;overflow:hidden}
+.glow{position:absolute;border-radius:50%;pointer-events:none;animation:pulseGlow 9s ease-in-out infinite}
+.hero-grid{position:relative;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero-grid h1{font-size:clamp(40px,5.2vw,66px);line-height:1.06;letter-spacing:-.035em;margin:20px 0 18px}
+.stats{display:grid;grid-template-columns:repeat(3,auto);gap:38px;margin-top:44px;justify-content:start}
+.stats .num{font-family:var(--font-heading);font-size:31px;letter-spacing:-.03em}
+.stats .lbl{font-size:12.5px;color:var(--color-neutral-500);letter-spacing:.06em;text-transform:uppercase}
+.chip{position:absolute;background:var(--color-surface);box-shadow:var(--shadow-md);border-radius:var(--radius-md);
+  padding:10px 14px;display:flex;align-items:center;gap:9px;font-size:13px;animation:floaty 6s ease-in-out infinite}
+.chip i{color:var(--color-accent-300)}
+
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.feature{padding:22px;transition:transform .25s,box-shadow .25s}
+.feature:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.feature .ico{width:38px;height:38px;border-radius:var(--radius-md);background:var(--color-accent-900);display:grid;place-items:center;margin-bottom:16px}
+.feature .ico i{font-size:19px;color:var(--color-accent-300)}
+.tinted{background:linear-gradient(180deg,transparent,color-mix(in srgb,#232532 55%,transparent),transparent)}
+.tinted-accent{background:linear-gradient(180deg,transparent,color-mix(in srgb,#2b2741 60%,transparent),transparent)}
+
+.carousel{overflow:hidden}
+.track{display:flex;gap:20px;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.tcard{flex:0 0 calc(50% - 10px);padding:26px}
+.dots{display:flex;gap:7px;margin-left:8px}
+.dots button{width:6px;height:6px;border:0;padding:0;border-radius:99px;background:var(--color-neutral-800);cursor:pointer;transition:all .3s}
+.dots button.on{width:22px;background:var(--color-accent)}
+
+.bar{height:7px;border-radius:99px;background:var(--color-neutral-900);overflow:hidden}
+.bar>span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--color-accent-600),var(--color-accent-400));
+  transition:width .9s cubic-bezier(.4,0,.2,1)}
+.metric-head{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px}
+.metric-head span:first-child{display:flex;align-items:center;gap:8px;color:var(--color-neutral-300)}
+.metric-head i{color:var(--color-accent-300)}
+.metric-head .val{color:var(--color-accent-300)}
+
+.breath-stage{position:relative;height:250px;display:grid;place-items:center;margin:10px 0 4px}
+.breath-stage .halo,.breath-stage .ring{position:absolute;border-radius:50%;transition:transform 3.6s ease-in-out}
+.breath-stage .halo{width:190px;height:190px;background:radial-gradient(circle,color-mix(in srgb,#9184d9 30%,transparent),transparent 70%)}
+.breath-stage .ring{width:150px;height:150px;border:1px solid var(--color-accent)}
+.pill{border:1px solid var(--color-neutral-800);background:transparent;color:var(--color-neutral-400);border-radius:99px;
+  padding:7px 15px;font-size:13px;font-family:var(--font-body);cursor:pointer;transition:all .2s}
+.pill.on{border-color:var(--color-accent);background:var(--color-accent-900);color:var(--color-accent-200)}
+
+.circle-row{display:flex;align-items:center;gap:14px;padding:15px 17px;border-radius:var(--radius-md);
+  background:var(--color-surface);box-shadow:var(--shadow-sm);transition:transform .2s}
+.circle-row:hover{transform:translateX(4px)}
+.circle-row i{font-size:20px;color:var(--color-accent-300)}
+.live-badge{position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:8px;
+  background:color-mix(in srgb,#161826 78%,transparent);backdrop-filter:blur(8px);border:1px solid var(--color-accent-700);
+  border-radius:99px;padding:7px 14px;font-size:12px;letter-spacing:.1em}
+.live-dot{position:relative;width:7px;height:7px;border-radius:50%;background:var(--color-accent-300)}
+.live-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--color-accent-300);animation:livePing 1.8s ease-out infinite}
+.join-bar{position:absolute;bottom:18px;left:18px;right:18px;background:color-mix(in srgb,#232532 88%,transparent);
+  backdrop-filter:blur(8px);border-radius:var(--radius-md);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+
+.toggle{display:inline-flex;gap:4px;padding:4px;border-radius:99px;background:var(--color-neutral-900);margin-bottom:34px}
+.toggle button{border:0;cursor:pointer;border-radius:99px;padding:8px 18px;font-size:13.5px;font-family:var(--font-body);
+  background:transparent;color:var(--color-neutral-400);transition:all .2s}
+.toggle button.on{background:var(--color-accent-800);color:var(--color-accent-100)}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:start}
+.plan{padding:28px;position:relative;box-shadow:var(--shadow-sm);transition:transform .25s}
+.plan:hover{transform:translateY(-6px)}
+.plan.popular{box-shadow:var(--shadow-lg)}
+.plan .price{font-family:var(--font-heading);font-size:42px;letter-spacing:-.035em}
+.plan ul{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:9px}
+.plan li{display:flex;gap:9px;align-items:flex-start;font-size:14px;color:var(--color-neutral-300)}
+.plan li i{color:var(--color-accent-300);margin-top:3px}
+
+.faq{border-radius:var(--radius-md);background:var(--color-surface);box-shadow:var(--shadow-sm);overflow:hidden}
+.faq>button{width:100%;text-align:left;background:transparent;border:0;cursor:pointer;padding:16px 18px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;color:var(--color-text);font-family:var(--font-body);font-size:15px}
+.faq>button i{color:var(--color-accent-300)}
+.faq .ans{padding:0 18px 18px;font-size:14px;color:var(--color-neutral-400);display:none}
+.faq.open .ans{display:block}
+
+.contact-band{border-radius:var(--radius-lg);padding:44px;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center;
+  background:linear-gradient(135deg,var(--color-section),color-mix(in srgb,#161826 55%,var(--color-section-glow)))}
+.contact-band a.line{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:var(--radius-md);
+  background:color-mix(in srgb,#161826 45%,transparent);color:var(--color-text);font-size:16px;transition:background .2s}
+.contact-band a.line:hover{background:color-mix(in srgb,#161826 70%,transparent)}
+.contact-band a.line i{font-size:20px;color:var(--color-accent-300)}
+
+footer{border-top:1px solid var(--color-divider);padding:48px 28px 34px}
+footer .cols{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+footer h3{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-500);margin-bottom:12px}
+footer .links{display:grid;gap:8px;font-size:14px}
+footer .base{max-width:1180px;margin:34px auto 0;padding-top:20px;border-top:1px solid var(--color-divider);
+  font-size:13px;color:var(--color-neutral-600);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+#checkout{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:24px;background:rgba(0,0,0,.66);backdrop-filter:blur(4px)}
+#checkout.open{display:grid}
+#checkout .dialog{animation:driftIn .3s ease-out}
+
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulseGlow{0%,100%{opacity:.35}50%{opacity:.7}}
+@keyframes livePing{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.4);opacity:0}}
+@keyframes driftIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+@media(max-width:900px){
+  .two-col,.hero-grid{grid-template-columns:1fr;gap:36px}
+  .navlinks a:not(.btn){display:none}
+  .tcard{flex:0 0 100%}
+  .contact-band{grid-template-columns:1fr;padding:28px}
+  footer .cols{grid-template-columns:1fr 1fr}
+  section{padding:60px 20px}
+  #top{padding:120px 20px 60px}
+}
+</style>
 </head>
 <body>
 
-    <!-- ─── NAV ─── -->
-    <nav id="navbar">
-        <div class="container">
-            <a href="#" class="logo">
-                <i class="fas fa-leaf"></i> ZenLife
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#progress">Progress</a></li>
-                <li><a href="#meditation">Meditation</a></li>
-                <li><a href="#live" style="color:var(--blue);font-weight:600;">Live Zoom</a></li>
-                <li><a href="#pricing" class="nav-cta">Join Now</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- ─── HERO ─── -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <span class="badge"><i class="fas fa-spa" style="margin-right:6px;"></i> Mindful Living</span>
-                <h1>Find Your <span>Balance</span> <br />Body &amp; Soul</h1>
-                <p>Transform your life with daily wellness, guided meditation, and mindful movement — all in one serene space.</p>
-                <div class="hero-actions">
-                    <a href="#pricing" class="btn btn-primary"><i class="fas fa-play-circle"></i> Start Free Trial</a>
-                    <a href="#meditation" class="btn btn-outline"><i class="fas fa-video"></i> Watch Meditation</a>
-                </div>
-                <div class="hero-stats">
-                    <div><strong>12K+</strong><span>Active Members</span></div>
-                    <div><strong>4.9★</strong><span>Avg. Rating</span></div>
-                    <div><strong>200+</strong><span>Guided Sessions</span></div>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop&crop=center&auto=format" alt="Woman meditating in nature" loading="lazy" />
-                </div>
-                <div class="floating-card"><i class="fas fa-heartbeat"></i> 1,200 cal burned</div>
-                <div class="floating-card"><i class="fas fa-brain"></i> 78% less stress</div>
-                <div class="floating-card"><i class="fas fa-moon"></i> Sleep 9.2h avg.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── FEATURES ─── -->
-    <section class="features" id="features">
-        <div class="container">
-            <span class="badge"><i class="fas fa-star"></i> What We Offer</span>
-            <h2 class="section-title">Wellness, redefined.</h2>
-            <p class="section-sub">Curated practices to nurture your mind, move your body, and restore your spirit.</p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon"><i class="fas fa-yoga"></i></div>
-                    <h3>Yoga &amp; Flow</h3>
-                    <p>Vinyasa, Hatha, and restorative sessions for all levels.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon"><i class="fas fa-brain"></i></div>
-                    <h3>Guided Meditation</h3>
-                    <p>Mindfulness practices to reduce anxiety and improve focus.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon"><i class="fas fa-users"></i></div>
-                    <h3>Live Zoom Circles</h3>
-                    <p>Real-time group sessions for community support and deep relaxation.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon"><i class="fas fa-dumbbell"></i></div>
-                    <h3>Fitness Training</h3>
-                    <p>High-intensity workouts, strength, and flexibility programs.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── TESTIMONIALS ─── -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <span class="badge"><i class="fas fa-quote-left"></i> Real Stories</span>
-            <h2 class="section-title">What our community says</h2>
-            <p class="section-sub" style="margin-bottom:1.5rem;">Thousands have found their path to calm. Here's what they share.</p>
-            <div class="testimonial-slider" id="testimonialSlider"></div>
-        </div>
-    </section>
-
-    <!-- ─── PROGRESS TRACKER ─── -->
-    <section class="progress-section" id="progress">
-        <div class="container">
-            <div class="progress-grid">
-                <div class="progress-info">
-                    <span class="badge"><i class="fas fa-chart-line"></i> Your Journey</span>
-                    <h2>Track your <br />wellness progress</h2>
-                    <p>Stay motivated with real-time insights on your daily habits, mindfulness, and fitness goals.</p>
-                    <div class="progress-item">
-                        <div class="label"><span>Mindfulness</span><span id="mindfulnessLabel">72%</span></div>
-                        <div class="progress-track"><div class="fill" id="mindfulnessFill" style="width:72%;"></div></div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="label"><span>Physical Activity</span><span id="activityLabel">58%</span></div>
-                        <div class="progress-track"><div class="fill" id="activityFill" style="width:58%;"></div></div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="label"><span>Sleep Quality</span><span id="sleepLabel">84%</span></div>
-                        <div class="progress-track"><div class="fill" id="sleepFill" style="width:84%;"></div></div>
-                    </div>
-                    <button class="btn btn-green" id="refreshProgress" style="margin-top:0.5rem;"><i class="fas fa-sync-alt"></i> Refresh Stats</button>
-                </div>
-                <div class="progress-visual">
-                    <div class="ring-wrap">
-                        <svg viewBox="0 0 200 200">
-                            <circle class="bg" cx="100" cy="100" r="90" />
-                            <circle class="progress-ring" id="progressRing" cx="100" cy="100" r="90" />
-                        </svg>
-                        <div class="ring-center">
-                            <strong id="overallPercent">71%</strong>
-                            <span>Overall Wellness</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── GUIDED MEDITATION ─── -->
-    <section class="meditation" id="meditation">
-        <div class="container">
-            <div class="meditation-grid">
-                <div class="meditation-video" id="meditationVideo">
-                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=450&fit=crop&crop=center&auto=format" alt="Meditation session" class="video-placeholder" loading="lazy" />
-                    <div class="play-btn" id="playMeditation"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="meditation-text">
-                    <span class="badge"><i class="fas fa-headphones"></i> Audio &amp; Video</span>
-                    <h2>Guided Meditation <br />for inner peace</h2>
-                    <p>Join our 10-minute daily sessions led by expert instructors. Calm your mind, reduce stress, and reconnect with yourself.</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> 10–30 minute sessions</li>
-                        <li><i class="fas fa-check-circle"></i> Breathwork &amp; visualization</li>
-                        <li><i class="fas fa-check-circle"></i> New content every week</li>
-                    </ul>
-                    <a href="#pricing" class="btn btn-primary" style="margin-top:1.5rem;"><i class="fas fa-play-circle"></i> Start Your Session</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── LIVE ZOOM SESSIONS ─── -->
-    <section class="live-sessions" id="live">
-        <div class="container">
-            <span class="badge"><i class="fas fa-video"></i> Live & Interactive</span>
-            <h2 class="section-title">Weekly Zoom Wellness Circles</h2>
-            <p class="section-sub">Connect in real-time with expert instructors and a supportive community for guided relaxation and mindful conversations.</p>
-            <div class="live-grid">
-                <div class="live-info">
-                    <div class="schedule-item">
-                        <i class="fas fa-calendar-day"></i>
-                        <div><strong>Mindful Mondays</strong><span>7:00 PM EST · Breathwork & Intention</span></div>
-                    </div>
-                    <div class="schedule-item">
-                        <i class="fas fa-calendar-day"></i>
-                        <div><strong>Wellness Wednesdays</strong><span>8:00 PM EST · Guided Meditation & Journaling</span></div>
-                    </div>
-                    <div class="schedule-item">
-                        <i class="fas fa-calendar-day"></i>
-                        <div><strong>Freedom Fridays</strong><span>6:00 PM EST · Community Sharing & Relaxation</span></div>
-                    </div>
-                    <div class="live-features">
-                        <span><i class="fas fa-check-circle"></i> Led by certified instructors</span>
-                        <span><i class="fas fa-check-circle"></i> Recordings available for members</span>
-                        <span><i class="fas fa-check-circle"></i> Ask questions & share in real-time</span>
-                    </div>
-                    <button class="btn btn-primary open-payment" data-plan="Premium" data-price="39">
-                        <i class="fas fa-users"></i> Join a Session Today
-                    </button>
-                    <div class="delivery-note">
-                        <i class="fas fa-envelope"></i> <i class="fab fa-whatsapp"></i>
-                        <span>Zoom link sent via Gmail &amp; WhatsApp after subscription</span>
-                    </div>
-                </div>
-                <div class="live-visual">
-                    <div class="zoom-card" id="zoomCard">
-                        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&h=600&fit=crop&crop=center&auto=format" alt="Zoom wellness meeting" loading="lazy" />
-                        <div class="live-badge"><i class="fas fa-circle" style="color:#ff4d4d;font-size:0.7rem;margin-right:6px;"></i> LIVE NOW</div>
-                        <div class="zoom-overlay" id="zoomOverlay">
-                            <i class="fas fa-play-circle"></i>
-                            <span>Join Zoom Meeting</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── PRICING / PAYMENT ─── -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <span class="badge"><i class="fas fa-lock"></i> Secure Plans</span>
-            <h2 class="section-title">Choose your wellness path</h2>
-            <p class="section-sub">Flexible subscriptions with a 7-day free trial. Cancel anytime.</p>
-            <div class="pricing-grid">
-                <!-- Starter -->
-                <div class="pricing-card">
-                    <h3>Starter</h3>
-                    <div class="price">$19 <span>/mo</span></div>
-                    <p class="desc">Essential wellness tools to begin your journey.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> 10 guided meditations</li>
-                        <li><i class="fas fa-check"></i> Basic yoga flows</li>
-                        <li><i class="fas fa-check"></i> Progress tracking</li>
-                        <li><i class="fas fa-check"></i> Community access</li>
-                    </ul>
-                    <button class="btn btn-outline open-payment" data-plan="Starter" data-price="19">Get Started</button>
-                </div>
-                <!-- Premium (featured) -->
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Most Popular</div>
-                    <h3>Premium</h3>
-                    <div class="price">$39 <span>/mo</span></div>
-                    <p class="desc">Full access to all content, live sessions &amp; coaching.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Unlimited meditations</li>
-                        <li><i class="fas fa-check"></i> Live yoga &amp; fitness classes</li>
-                        <li><i class="fas fa-check"></i> <strong>Weekly Live Zoom Circles</strong></li>
-                        <li><i class="fas fa-check"></i> Personalized wellness plan</li>
-                        <li><i class="fas fa-check"></i> 1-on-1 coaching session</li>
-                        <li><i class="fas fa-check"></i> Offline downloads</li>
-                    </ul>
-                    <button class="btn btn-primary open-payment" data-plan="Premium" data-price="39">Start Free Trial</button>
-                </div>
-                <!-- Family -->
-                <div class="pricing-card">
-                    <h3>Family</h3>
-                    <div class="price">$59 <span>/mo</span></div>
-                    <p class="desc">Up to 5 members, perfect for the whole household.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Everything in Premium</li>
-                        <li><i class="fas fa-check"></i> 5 individual profiles</li>
-                        <li><i class="fas fa-check"></i> Family progress hub</li>
-                        <li><i class="fas fa-check"></i> Kids mindfulness content</li>
-                        <li><i class="fas fa-check"></i> Priority support</li>
-                    </ul>
-                    <button class="btn btn-outline open-payment" data-plan="Family" data-price="59">Get Started</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── PAYMENT MODAL (PayU integrated) ─── -->
-    <div class="modal-overlay" id="paymentModal">
-        <div class="modal">
-            <button class="close-modal" id="closeModal">&times;</button>
-            <h2>Secure Checkout</h2>
-            <p id="modalPlan">Subscribe to <strong>Premium</strong> — $39/month</p>
-            <form id="paymentForm" novalidate>
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" placeholder="John Doe" required />
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="john@example.com" required />
-                </div>
-                <div class="form-group">
-                    <label for="phone">WhatsApp Number</label>
-                    <input type="tel" id="phone" placeholder="+91 98765 43210" required />
-                </div>
-                <div class="payu-badge">
-                    <i class="fas fa-shield-alt" style="color:#1a2a3a;"></i>
-                    <span>Secured by <strong>PayU</strong> — 256-bit encryption</span>
-                </div>
-                <button type="submit" class="btn" style="background:#1a2a3a;">
-                    <i class="fas fa-credit-card"></i> Pay with PayU
-                </button>
-                <div class="secure-badge">
-                    <i class="fas fa-lock"></i> Your data is safe &amp; encrypted
-                </div>
-                <div style="font-size:0.8rem;color:var(--text-light);text-align:center;margin-top:0.8rem;border-top:1px solid var(--neutral-dark);padding-top:0.8rem;">
-                    <i class="fas fa-envelope"></i> <i class="fab fa-whatsapp"></i> Zoom link sent via email &amp; WhatsApp
-                </div>
-            </form>
-        </div>
+<nav class="site">
+  <div class="row">
+    <a class="brand" href="#top"><span class="mark"><i class="ph-fill ph-leaf" style="font-size:14px;color:var(--color-accent)"></i></span>ZenLife</a>
+    <div style="flex:1"></div>
+    <div class="navlinks">
+      <a href="#features" data-nav="features">Features</a>
+      <a href="#testimonials" data-nav="testimonials">Testimonials</a>
+      <a href="#progress" data-nav="progress">Progress</a>
+      <a href="#meditation" data-nav="meditation">Meditation</a>
+      <a href="#live" data-nav="live">Live Zoom</a>
+      <a class="btn btn-primary" href="#pricing" style="font-size:13px">Join Now</a>
     </div>
+  </div>
+  <div id="progressbar"></div>
+</nav>
 
-    <!-- ─── FOOTER ─── -->
-    <footer>
-        <div class="container">
-            <div>
-                <a href="#" class="logo" style="color:#fff;font-size:1.6rem;margin-bottom:0.5rem;display:inline-block;">
-                    <i class="fas fa-leaf"></i> ZenLife
-                </a>
-                <p style="max-width:280px;font-size:0.9rem;">Nurture your mind, move your body, find your peace.</p>
-                <div class="socials">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-spotify"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                </div>
-            </div>
-            <div>
-                <h4>Explore</h4>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#meditation">Meditation</a></li>
-                    <li><a href="#live">Live Zoom</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Join Us</h4>
-                <ul>
-                    <li><a href="#pricing">Membership</a></li>
-                    <li><a href="#">Refer a Friend</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
-            <div class="copyright">
-                &copy; 2026 ZenLife Wellness. All rights reserved. Made with <i class="fas fa-heart" style="color:var(--blue);"></i> for calm.
-            </div>
-        </div>
-    </footer>
+<!-- HERO -->
+<section id="top">
+  <div class="glow" style="top:-180px;left:-120px;width:520px;height:520px;background:radial-gradient(circle,color-mix(in srgb,#9184d9 26%,transparent),transparent 68%)"></div>
+  <div class="glow" style="bottom:-160px;right:-100px;width:420px;height:420px;animation-duration:12s;background:radial-gradient(circle,color-mix(in srgb,#4c5397 24%,transparent),transparent 70%)"></div>
+  <div class="hero-grid">
+    <div>
+      <span class="tag tag-outline" style="gap:6px"><i class="ph ph-sparkle"></i>&nbsp;Mindful Living</span>
+      <h1>Find Your Balance<br><span style="color:var(--color-accent-300)">Body &amp; Soul</span></h1>
+      <p style="font-size:17px;color:var(--color-neutral-400);max-width:460px;margin:0 0 28px;text-wrap:pretty">
+        Transform your life with daily wellness, guided meditation, and mindful movement — all in one serene space.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="#pricing" style="padding:12px 22px">Start Free Trial</a>
+        <a class="btn btn-ghost" href="#meditation" style="padding:12px 22px"><i class="ph ph-play-circle" style="font-size:17px"></i> Watch Meditation</a>
+      </div>
+      <div class="stats">
+        <div><div class="num" id="statMembers">0</div><div class="lbl">Active Members</div></div>
+        <div><div class="num" id="statRating" style="color:var(--color-accent-300)">0</div><div class="lbl">Avg. Rating</div></div>
+        <div><div class="num" id="statSessions">0</div><div class="lbl">Guided Sessions</div></div>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div class="lighten" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md)">
+        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&amp;h=700&amp;fit=crop&amp;auto=format" alt="Woman meditating in nature" style="width:100%;height:440px;object-fit:cover">
+      </div>
+      <div class="chip" style="top:26px;left:-26px"><i class="ph-fill ph-fire"></i> 1,200 cal burned</div>
+      <div class="chip" style="bottom:96px;right:-22px;animation-duration:7.5s;animation-delay:.6s"><i class="ph-fill ph-heart"></i> 78% less stress</div>
+      <div class="chip" style="bottom:22px;left:14px;animation-duration:8s;animation-delay:1.2s"><i class="ph-fill ph-moon"></i> Sleep 9.2h avg.</div>
+    </div>
+  </div>
+</section>
 
-    <!-- ─── JAVASCRIPT ─── -->
-    <script>
-        (function() {
-            'use strict';
+<!-- FEATURES -->
+<section id="features"><div class="wrap">
+  <span class="tag tag-accent">What We Offer</span>
+  <h2 class="eyebrow-h2">Wellness, redefined.</h2>
+  <p class="lede" style="max-width:520px">Curated practices to nurture your mind, move your body, and restore your spirit.</p>
+  <div class="grid-cards">
+    <div class="card feature"><span class="ico"><i class="ph ph-person-simple-tai-chi"></i></span>
+      <div class="card-title" style="font-size:18px">Yoga &amp; Flow</div>
+      <p style="color:var(--color-neutral-400);margin:8px 0 0;font-size:14.5px">Vinyasa, Hatha, and restorative sessions for all levels.</p>
+      <div style="margin-top:16px;font-size:13px;color:var(--color-accent-300)">48 flows · 15–60 min</div></div>
+    <div class="card feature"><span class="ico"><i class="ph ph-brain"></i></span>
+      <div class="card-title" style="font-size:18px">Guided Meditation</div>
+      <p style="color:var(--color-neutral-400);margin:8px 0 0;font-size:14.5px">Mindfulness practices to reduce anxiety and improve focus.</p>
+      <div style="margin-top:16px;font-size:13px;color:var(--color-accent-300)">120 sessions · sleep &amp; focus</div></div>
+    <div class="card feature"><span class="ico"><i class="ph ph-video-camera"></i></span>
+      <div class="card-title" style="font-size:18px">Live Zoom Circles</div>
+      <p style="color:var(--color-neutral-400);margin:8px 0 0;font-size:14.5px">Real-time group sessions for community support and deep relaxation.</p>
+      <div style="margin-top:16px;font-size:13px;color:var(--color-accent-300)">3 circles every week</div></div>
+    <div class="card feature"><span class="ico"><i class="ph ph-barbell"></i></span>
+      <div class="card-title" style="font-size:18px">Fitness Training</div>
+      <p style="color:var(--color-neutral-400);margin:8px 0 0;font-size:14.5px">High-intensity workouts, strength, and flexibility programs.</p>
+      <div style="margin-top:16px;font-size:13px;color:var(--color-accent-300)">Strength · HIIT · mobility</div></div>
+  </div>
+</div></section>
 
-            // ─── Nav Toggle ───
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('navLinks');
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('open');
-                navLinks.classList.toggle('open');
-            });
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('open');
-                    navLinks.classList.remove('open');
-                });
-            });
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="tinted"><div class="wrap">
+  <span class="tag tag-accent">Real Stories</span>
+  <h2 class="eyebrow-h2">What our community says</h2>
+  <p class="lede">Thousands have found their path to calm. Here's what they share.</p>
+  <div class="carousel"><div class="track" id="track">
+    <div class="card tcard">
+      <div style="color:var(--color-accent-300);font-size:14px;letter-spacing:.18em">★★★★★</div>
+      <p style="font-size:17px;margin:14px 0 20px;text-wrap:pretty">Six weeks in and my sleep has completely changed. The evening breathwork is the only routine I have ever kept.</p>
+      <div style="display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:50%;background:var(--color-accent-800);display:grid;place-items:center;font-size:14px;color:var(--color-accent-200)">PM</span>
+        <div><div style="font-size:14.5px">Priya Menon</div><div style="font-size:12.5px;color:var(--color-neutral-500)">Premium member</div></div></div>
+    </div>
+    <div class="card tcard">
+      <div style="color:var(--color-accent-300);font-size:14px;letter-spacing:.18em">★★★★★</div>
+      <p style="font-size:17px;margin:14px 0 20px;text-wrap:pretty">The live circles feel like a room full of friends. I show up on Wednesdays without fail now.</p>
+      <div style="display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:50%;background:var(--color-accent-800);display:grid;place-items:center;font-size:14px;color:var(--color-accent-200)">DO</span>
+        <div><div style="font-size:14.5px">Daniel Okafor</div><div style="font-size:12.5px;color:var(--color-neutral-500)">Family plan</div></div></div>
+    </div>
+    <div class="card tcard">
+      <div style="color:var(--color-accent-300);font-size:14px;letter-spacing:.18em">★★★★★</div>
+      <p style="font-size:17px;margin:14px 0 20px;text-wrap:pretty">I came for the yoga and stayed for the progress tracking. Seeing the numbers move keeps me honest.</p>
+      <div style="display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:50%;background:var(--color-accent-800);display:grid;place-items:center;font-size:14px;color:var(--color-accent-200)">SL</span>
+        <div><div style="font-size:14.5px">Sara Lindqvist</div><div style="font-size:12.5px;color:var(--color-neutral-500)">Starter member</div></div></div>
+    </div>
+    <div class="card tcard">
+      <div style="color:var(--color-accent-300);font-size:14px;letter-spacing:.18em">★★★★★</div>
+      <p style="font-size:17px;margin:14px 0 20px;text-wrap:pretty">Ten minutes each morning has done more for my focus than any app I have paid for.</p>
+      <div style="display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:50%;background:var(--color-accent-800);display:grid;place-items:center;font-size:14px;color:var(--color-accent-200)">AR</span>
+        <div><div style="font-size:14.5px">Arjun Rao</div><div style="font-size:12.5px;color:var(--color-neutral-500)">Premium member</div></div></div>
+    </div>
+  </div></div>
+  <div style="display:flex;align-items:center;gap:14px;margin-top:26px">
+    <button class="btn btn-icon" id="tPrev" aria-label="Previous testimonial"><i class="ph ph-arrow-left"></i></button>
+    <button class="btn btn-icon" id="tNext" aria-label="Next testimonial"><i class="ph ph-arrow-right"></i></button>
+    <div class="dots" id="tDots"></div>
+  </div>
+</div></section>
 
-            // ─── Testimonials ───
-            const testimonials = [{
-                name: 'Sarah M.',
-                avatar: 'SM',
-                text: 'ZenLife completely transformed my morning routine. I feel more focused and calm throughout the day.',
-                rating: 5
-            }, {
-                name: 'James K.',
-                avatar: 'JK',
-                text: 'The yoga flows are incredible. I have gained so much strength and flexibility in just 6 weeks.',
-                rating: 5
-            }, {
-                name: 'Priya R.',
-                avatar: 'PR',
-                text: 'Guided meditations helped me manage my anxiety. This is the best investment in my well-being.',
-                rating: 5
-            }, {
-                name: 'Alex T.',
-                avatar: 'AT',
-                text: 'I love the variety — from intense workouts to soothing meditations. Everything in one place.',
-                rating: 4
-            }, {
-                name: 'Maya L.',
-                avatar: 'ML',
-                text: 'The progress tracker keeps me accountable. I am sleeping better and feeling more energetic.',
-                rating: 5
-            }];
-            const slider = document.getElementById('testimonialSlider');
-            testimonials.forEach(t => {
-                const card = document.createElement('div');
-                card.className = 'testimonial-card';
-                const stars = '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating);
-                card.innerHTML = `
-              <div class="stars">${stars}</div>
-              <blockquote>“${t.text}”</blockquote>
-              <div class="author">
-                <div class="avatar">${t.avatar}</div>
-                <div>${t.name} <span>• verified member</span></div>
-              </div>
-            `;
-                slider.appendChild(card);
-            });
-            // duplicate for seamless scroll
-            testimonials.forEach(t => {
-                const card = document.createElement('div');
-                card.className = 'testimonial-card';
-                const stars = '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating);
-                card.innerHTML = `
-              <div class="stars">${stars}</div>
-              <blockquote>“${t.text}”</blockquote>
-              <div class="author">
-                <div class="avatar">${t.avatar}</div>
-                <div>${t.name} <span>• verified member</span></div>
-              </div>
-            `;
-                slider.appendChild(card);
-            });
+<!-- PROGRESS -->
+<section id="progress"><div class="wrap two-col">
+  <div>
+    <span class="tag tag-accent">Your Journey</span>
+    <h2 class="eyebrow-h2">Track your wellness progress</h2>
+    <p class="lede" style="margin-bottom:30px">Stay motivated with real-time insights on your daily habits, mindfulness, and fitness goals.</p>
+    <div style="display:grid;gap:20px" id="metrics">
+      <div><div class="metric-head"><span><i class="ph ph-brain"></i>Mindfulness</span><span class="val">72%</span></div><div class="bar"><span style="width:72%"></span></div></div>
+      <div><div class="metric-head"><span><i class="ph ph-person-simple-run"></i>Physical Activity</span><span class="val">58%</span></div><div class="bar"><span style="width:58%"></span></div></div>
+      <div><div class="metric-head"><span><i class="ph ph-moon-stars"></i>Sleep Quality</span><span class="val">84%</span></div><div class="bar"><span style="width:84%"></span></div></div>
+    </div>
+    <button class="btn btn-secondary" id="refreshStats" style="margin-top:26px"><i class="ph ph-arrows-clockwise"></i> Refresh Stats</button>
+  </div>
+  <div class="card elev-md" style="padding:34px;display:grid;place-items:center;gap:22px">
+    <div style="position:relative;width:210px;height:210px">
+      <svg viewBox="0 0 120 120" style="width:100%;height:100%;transform:rotate(-90deg)">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#292b31" stroke-width="9"></circle>
+        <circle id="ring" cx="60" cy="60" r="52" fill="none" stroke="#b5abfc" stroke-width="9" stroke-linecap="round"
+          stroke-dasharray="326.7" stroke-dashoffset="94.7" style="transition:stroke-dashoffset .9s cubic-bezier(.4,0,.2,1)"></circle>
+      </svg>
+      <div style="position:absolute;inset:0;display:grid;place-content:center;text-align:center">
+        <div style="font-family:var(--font-heading);font-size:40px;letter-spacing:-.03em" id="overall">71%</div>
+        <div style="font-size:12px;color:var(--color-neutral-500);letter-spacing:.08em;text-transform:uppercase">Overall Wellness</div>
+      </div>
+    </div>
+    <div class="lighten" style="border-radius:var(--radius-md);overflow:hidden;width:100%">
+      <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&amp;h=380&amp;fit=crop&amp;auto=format" alt="Meditation session" style="width:100%;height:150px;object-fit:cover">
+    </div>
+  </div>
+</div></section>
 
-            // ─── Progress Tracker ───
-            const mindfulnessFill = document.getElementById('mindfulnessFill');
-            const activityFill = document.getElementById('activityFill');
-            const sleepFill = document.getElementById('sleepFill');
-            const mindfulnessLabel = document.getElementById('mindfulnessLabel');
-            const activityLabel = document.getElementById('activityLabel');
-            const sleepLabel = document.getElementById('sleepLabel');
-            const overallPercent = document.getElementById('overallPercent');
-            const progressRing = document.getElementById('progressRing');
-            const CIRCUMFERENCE = 565.48;
+<!-- MEDITATION -->
+<section id="meditation" class="tinted-accent"><div class="wrap two-col">
+  <div>
+    <span class="tag tag-accent">Audio &amp; Video</span>
+    <h2 class="eyebrow-h2">Guided Meditation for inner peace</h2>
+    <p class="lede" style="margin-bottom:24px">Join our 10-minute daily sessions led by expert instructors. Calm your mind, reduce stress, and reconnect with yourself.</p>
+    <div style="display:grid;gap:11px;margin-bottom:28px;font-size:14.5px;color:var(--color-neutral-300)">
+      <div style="display:flex;gap:10px;align-items:center"><i class="ph ph-clock" style="color:var(--color-accent-300)"></i> 10–30 minute sessions</div>
+      <div style="display:flex;gap:10px;align-items:center"><i class="ph ph-wind" style="color:var(--color-accent-300)"></i> Breathwork &amp; visualization</div>
+      <div style="display:flex;gap:10px;align-items:center"><i class="ph ph-calendar-star" style="color:var(--color-accent-300)"></i> New content every week</div>
+    </div>
+    <a class="btn btn-primary" href="#pricing" style="padding:12px 22px">Start Your Session</a>
+  </div>
+  <div class="card elev-md" style="padding:34px;text-align:center">
+    <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-500)">Breathwork Player</div>
+    <div class="breath-stage">
+      <div class="halo" id="halo"></div><div class="ring" id="ringVisual"></div>
+      <div style="position:relative">
+        <div style="font-family:var(--font-heading);font-size:22px" id="breathPhase">Ready when you are</div>
+        <div style="font-size:13px;color:var(--color-neutral-500);margin-top:4px" id="breathTime">10-minute session</div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:10px;margin-top:8px">
+      <button class="btn btn-primary" id="breathToggle" style="padding:11px 20px"><i class="ph-fill ph-play" id="breathIcon"></i> <span id="breathAction">Begin session</span></button>
+      <button class="btn btn-ghost" id="breathReset" aria-label="Reset session"><i class="ph ph-arrow-counter-clockwise"></i></button>
+    </div>
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:20px" id="lengths">
+      <button class="pill on" data-min="10">10 min</button>
+      <button class="pill" data-min="20">20 min</button>
+      <button class="pill" data-min="30">30 min</button>
+    </div>
+  </div>
+</div></section>
 
-            function updateProgress(mind, act, sleep) {
-                const m = Math.min(100, Math.max(0, mind));
-                const a = Math.min(100, Math.max(0, act));
-                const s = Math.min(100, Math.max(0, sleep));
-                mindfulnessFill.style.width = m + '%';
-                activityFill.style.width = a + '%';
-                sleepFill.style.width = s + '%';
-                mindfulnessLabel.textContent = m + '%';
-                activityLabel.textContent = a + '%';
-                sleepLabel.textContent = s + '%';
-                const avg = Math.round((m + a + s) / 3);
-                overallPercent.textContent = avg + '%';
-                const offset = CIRCUMFERENCE - (avg / 100) * CIRCUMFERENCE;
-                progressRing.style.strokeDashoffset = offset;
-            }
+<!-- LIVE -->
+<section id="live"><div class="wrap two-col">
+  <div>
+    <span class="tag tag-accent">Live &amp; Interactive</span>
+    <h2 class="eyebrow-h2">Weekly Zoom Wellness Circles</h2>
+    <p class="lede" style="margin-bottom:26px">Connect in real-time with expert instructors and a supportive community for guided relaxation and mindful conversations.</p>
+    <div style="display:grid;gap:10px">
+      <div class="circle-row" style="box-shadow:var(--shadow-md)"><i class="ph ph-wind"></i>
+        <div style="flex:1"><div style="font-size:15px">Mindful Mondays</div><div style="font-size:13px;color:var(--color-neutral-500)">7:00 PM EST · Breathwork &amp; Intention</div></div>
+        <span style="font-size:12px;color:var(--color-accent-300)">Live now</span></div>
+      <div class="circle-row"><i class="ph ph-notebook"></i>
+        <div style="flex:1"><div style="font-size:15px">Wellness Wednesdays</div><div style="font-size:13px;color:var(--color-neutral-500)">8:00 PM EST · Guided Meditation &amp; Journaling</div></div>
+        <span style="font-size:12px;color:var(--color-neutral-500)">32 seats</span></div>
+      <div class="circle-row"><i class="ph ph-users-three"></i>
+        <div style="flex:1"><div style="font-size:15px">Freedom Fridays</div><div style="font-size:13px;color:var(--color-neutral-500)">6:00 PM EST · Community Sharing &amp; Relaxation</div></div>
+        <span style="font-size:12px;color:var(--color-neutral-500)">18 seats</span></div>
+    </div>
+    <div style="margin-top:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <a class="btn btn-primary" href="#pricing" style="padding:12px 22px">Join a Session Today</a>
+      <div style="font-size:13.5px;color:var(--color-neutral-400)">Next circle starts in <span style="color:var(--color-accent-300)" id="countdown">—</span></div>
+    </div>
+    <div style="margin-top:16px;font-size:12.5px;color:var(--color-neutral-500);display:flex;align-items:center;gap:7px"><i class="ph ph-lock-simple"></i> Zoom link sent via email &amp; WhatsApp after subscription</div>
+  </div>
+  <div style="position:relative">
+    <div class="lighten" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md)">
+      <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=900&amp;h=650&amp;fit=crop&amp;auto=format" alt="Zoom wellness meeting" style="width:100%;height:400px;object-fit:cover">
+    </div>
+    <div class="live-badge"><span class="live-dot"></span> LIVE NOW</div>
+    <div class="join-bar">
+      <div><div style="font-size:14.5px">Mindful Mondays</div>
+        <div style="font-size:12.5px;color:var(--color-neutral-500)"><span id="attendees">42</span> members in the room</div></div>
+      <a class="btn btn-primary" href="#pricing" style="font-size:13px;white-space:nowrap">Join Zoom</a>
+    </div>
+  </div>
+</div></section>
 
-            function randomProgress() {
-                const m = Math.round(60 + Math.random() * 35);
-                const a = Math.round(45 + Math.random() * 40);
-                const s = Math.round(65 + Math.random() * 30);
-                updateProgress(m, a, s);
-            }
-            document.getElementById('refreshProgress').addEventListener('click', randomProgress);
-            setTimeout(randomProgress, 600);
+<!-- PRICING -->
+<section id="pricing" class="tinted"><div class="wrap">
+  <span class="tag tag-accent">Secure Plans</span>
+  <h2 class="eyebrow-h2">Choose your wellness path</h2>
+  <p class="lede" style="margin-bottom:26px">Flexible subscriptions with a 7-day free trial. Cancel anytime — payments already made are non-refundable.</p>
+  <div class="toggle" id="billing">
+    <button class="on" data-billing="monthly">Monthly</button>
+    <button data-billing="annual">Annual · save 20%</button>
+  </div>
+  <div class="plans">
+    <div class="card plan">
+      <div class="card-title" style="font-size:20px">Starter</div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin:12px 0 6px">
+        <span class="price" data-monthly="19">$19</span><span style="color:var(--color-neutral-500);font-size:14px" class="per">/mo</span></div>
+      <p style="color:var(--color-neutral-400);font-size:14px;margin:0 0 18px">Essential wellness tools to begin your journey.</p>
+      <ul><li><i class="ph ph-check"></i>10 guided meditations</li><li><i class="ph ph-check"></i>Basic yoga flows</li>
+        <li><i class="ph ph-check"></i>Progress tracking</li><li><i class="ph ph-check"></i>Community access</li></ul>
+      <button class="btn btn-primary btn-block" data-plan="Starter">Get Started</button>
+    </div>
+    <div class="card plan popular">
+      <span class="tag tag-accent" style="position:absolute;top:-11px;right:20px">Most Popular</span>
+      <div class="card-title" style="font-size:20px">Premium</div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin:12px 0 6px">
+        <span class="price" data-monthly="39">$39</span><span style="color:var(--color-neutral-500);font-size:14px" class="per">/mo</span></div>
+      <p style="color:var(--color-neutral-400);font-size:14px;margin:0 0 18px">Full access to all content, live sessions &amp; coaching.</p>
+      <ul><li><i class="ph ph-check"></i>Unlimited meditations</li><li><i class="ph ph-check"></i>Live yoga &amp; fitness classes</li>
+        <li><i class="ph ph-check"></i>Weekly live Zoom circles</li><li><i class="ph ph-check"></i>Personalized wellness plan</li>
+        <li><i class="ph ph-check"></i>1-on-1 coaching session</li><li><i class="ph ph-check"></i>Offline downloads</li></ul>
+      <button class="btn btn-primary btn-block" data-plan="Premium">Start Free Trial</button>
+    </div>
+    <div class="card plan">
+      <div class="card-title" style="font-size:20px">Family</div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin:12px 0 6px">
+        <span class="price" data-monthly="59">$59</span><span style="color:var(--color-neutral-500);font-size:14px" class="per">/mo</span></div>
+      <p style="color:var(--color-neutral-400);font-size:14px;margin:0 0 18px">Up to 5 members, perfect for the whole household.</p>
+      <ul><li><i class="ph ph-check"></i>Everything in Premium</li><li><i class="ph ph-check"></i>5 individual profiles</li>
+        <li><i class="ph ph-check"></i>Family progress hub</li><li><i class="ph ph-check"></i>Kids mindfulness content</li>
+        <li><i class="ph ph-check"></i>Priority support</li></ul>
+      <button class="btn btn-primary btn-block" data-plan="Family">Get Started</button>
+    </div>
+  </div>
+</div></section>
 
-            // ─── Meditation Video Play ───
-            const playBtn = document.getElementById('playMeditation');
-            const videoContainer = document.getElementById('meditationVideo');
-            let isPlaying = false;
-            playBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (!isPlaying) {
-                    const existingImg = videoContainer.querySelector('.video-placeholder');
-                    if (existingImg) existingImg.style.opacity = '0.4';
-                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    playBtn.style.background = 'rgba(107, 181, 217, 0.6)';
-                    isPlaying = true;
-                    const msg = document.createElement('div');
-                    msg.style.cssText =
-                        'position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:#fff;padding:6px 18px;border-radius:60px;font-size:0.8rem;pointer-events:none;';
-                    msg.textContent = '🎵 Meditation session playing...';
-                    msg.id = 'meditationMsg';
-                    const oldMsg = document.getElementById('meditationMsg');
-                    if (oldMsg) oldMsg.remove();
-                    videoContainer.appendChild(msg);
-                } else {
-                    const img = videoContainer.querySelector('.video-placeholder');
-                    if (img) img.style.opacity = '0.7';
-                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    playBtn.style.background = 'rgba(255,255,255,0.2)';
-                    isPlaying = false;
-                    const oldMsg = document.getElementById('meditationMsg');
-                    if (oldMsg) oldMsg.remove();
-                }
-            });
-            videoContainer.addEventListener('click', function(e) {
-                if (e.target.closest('.play-btn')) return;
-                playBtn.click();
-            });
+<!-- POLICY -->
+<section id="policy"><div class="wrap" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:52px">
+  <div>
+    <span class="tag tag-outline">Before You Subscribe</span>
+    <h2 style="font-size:clamp(28px,3.2vw,40px);margin:16px 0 12px">Non-refundable policy</h2>
+    <p style="color:var(--color-neutral-400);margin:0">All ZenLife subscriptions and session fees are non-refundable. Use the 7-day free trial to be sure the practice suits you before you pay.</p>
+    <div style="margin-top:24px;padding:18px;border-radius:var(--radius-md);background:var(--color-accent-900);box-shadow:var(--shadow-sm);font-size:14px;color:var(--color-accent-200);display:flex;gap:11px">
+      <i class="ph-fill ph-warning-circle" style="font-size:19px"></i>
+      <span>Once a payment is processed, no refunds, part-refunds or credits are issued for any reason, including unused time or missed sessions.</span>
+    </div>
+  </div>
+  <div style="display:grid;gap:10px;align-content:start">
+    <div class="faq open"><button><span>Why are payments non-refundable?</span><i class="ph ph-minus"></i></button>
+      <div class="ans">Every subscription immediately unlocks the full library, live circle seats and instructor time, all of which are reserved for you the moment you pay. We offer a 7-day free trial instead so nothing is charged until you are sure.</div></div>
+    <div class="faq"><button><span>What if I cancel mid-cycle?</span><i class="ph ph-plus"></i></button>
+      <div class="ans">You can cancel any time and keep access until the end of the paid period. No part-refund or credit is issued for the unused days.</div></div>
+    <div class="faq"><button><span>What about missed live sessions?</span><i class="ph ph-plus"></i></button>
+      <div class="ans">Recordings of every Zoom circle stay available to members, so a missed session is never a lost session. Missed sessions are not refundable.</div></div>
+    <div class="faq"><button><span>A payment failed or was charged twice.</span><i class="ph ph-plus"></i></button>
+      <div class="ans">Duplicate or failed transactions are not covered by this policy. Write to supportcare11@gmail.com or call 9120677715 with the transaction reference and we will resolve it.</div></div>
+  </div>
+</div></section>
 
-            // ─── Zoom Card Interaction ───
-            const zoomOverlay = document.getElementById('zoomOverlay');
-            const zoomCard = document.getElementById('zoomCard');
-            zoomOverlay.addEventListener('click', function(e) {
-                e.stopPropagation();
-                alert(
-                    '🌿 You are joining the Live Zoom Wellness Circle!\n\n🔗 A secure Zoom link will be sent to your email and WhatsApp after subscription.\n\n💡 Upgrade to Premium to access all live sessions.');
-            });
-            zoomCard.addEventListener('click', function(e) {
-                if (e.target.closest('.zoom-overlay')) return;
-                zoomOverlay.click();
-            });
+<!-- CONTACT -->
+<section id="contact" style="padding:70px 28px 86px"><div class="wrap">
+  <div class="contact-band">
+    <div>
+      <h2 style="font-size:clamp(26px,3vw,36px);margin:0 0 10px">Questions before you begin?</h2>
+      <p style="color:var(--color-accent-200);margin:0;max-width:460px">Our support team answers within one working day, seven days a week.</p>
+    </div>
+    <div style="display:grid;gap:12px">
+      <a class="line" href="mailto:supportcare11@gmail.com"><i class="ph ph-envelope-simple"></i> supportcare11@gmail.com</a>
+      <a class="line" href="tel:9120677715"><i class="ph ph-phone"></i> 9120677715</a>
+    </div>
+  </div>
+</div></section>
 
-            // ─── Payment Modal (PayU integration) ───
-            const modal = document.getElementById('paymentModal');
-            const closeModal = document.getElementById('closeModal');
-            const modalPlan = document.getElementById('modalPlan');
-            const paymentForm = document.getElementById('paymentForm');
+<footer>
+  <div class="cols">
+    <div>
+      <div class="brand" style="font-size:18px"><span class="mark" style="width:24px;height:24px;box-shadow:none"><i class="ph-fill ph-leaf" style="font-size:13px;color:var(--color-accent)"></i></span>ZenLife</div>
+      <p style="color:var(--color-neutral-500);font-size:14px;margin:12px 0 0;max-width:250px">Nurture your mind, move your body, find your peace.</p>
+    </div>
+    <div><h3>Explore</h3><div class="links"><a href="#features">Features</a><a href="#meditation">Meditation</a><a href="#live">Live Zoom</a><a href="#pricing">Pricing</a></div></div>
+    <div><h3>Support</h3><div class="links"><a href="#policy">Non-refundable policy</a><a href="mailto:supportcare11@gmail.com">supportcare11@gmail.com</a><a href="tel:9120677715">9120677715</a></div></div>
+    <div><h3>Join Us</h3><div class="links"><a href="#pricing">Membership</a><a href="#live">Live circles</a><a href="#progress">Progress hub</a></div></div>
+  </div>
+  <div class="base"><span>© 2026 ZenLife Wellness. All rights reserved.</span><span>All payments are non-refundable.</span></div>
+</footer>
 
-            document.querySelectorAll('.open-payment').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const plan = this.dataset.plan;
-                    const price = this.dataset.price;
-                    modalPlan.innerHTML = `Subscribe to <strong>${plan}</strong> — $${price}/month`;
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            });
+<!-- CHECKOUT -->
+<div id="checkout">
+  <div class="dialog">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+      <div><div class="dialog-title">Secure Checkout</div>
+        <div style="font-size:14px;color:var(--color-neutral-400);margin-top:4px" id="ckSummary">Subscribe to Premium — $39/mo</div></div>
+      <button class="btn btn-icon" id="ckClose" aria-label="Close checkout"><i class="ph ph-x"></i></button>
+    </div>
+    <form id="ckForm" style="display:grid;gap:14px;margin-top:22px">
+      <div class="field"><label for="ck-name">Full Name</label><input class="input" id="ck-name" placeholder="Ananya Sharma"></div>
+      <div class="field"><label for="ck-email">Email Address</label><input class="input" id="ck-email" type="email" placeholder="you@example.com"></div>
+      <div class="field"><label for="ck-phone">WhatsApp Number</label><input class="input" id="ck-phone" placeholder="10-digit number"></div>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--color-neutral-300);cursor:pointer">
+        <input type="checkbox" id="ck-agree" style="margin-top:3px;accent-color:#9184d9">
+        <span>I understand that all payments are non-refundable.</span></label>
+      <div id="ckError" style="display:none;font-size:13px;color:var(--color-accent-200);background:var(--color-accent-900);border-radius:var(--radius-sm);padding:10px 12px"></div>
+      <button class="btn btn-primary btn-block" type="submit" style="padding:12px" id="ckPay">Pay $39/mo</button>
+      <div style="font-size:12px;color:var(--color-neutral-500);text-align:center">Secured · 256-bit encryption · Zoom link sent via email &amp; WhatsApp</div>
+    </form>
+    <div id="ckDone" style="display:none;text-align:center;padding:26px 0 6px">
+      <i class="ph-fill ph-check-circle" style="font-size:48px;color:var(--color-accent-300)"></i>
+      <div style="font-family:var(--font-heading);font-size:20px;margin-top:12px">You're in.</div>
+      <p style="color:var(--color-neutral-400);font-size:14px">Your Zoom link and welcome pack are on the way to your email and WhatsApp.</p>
+      <p style="color:var(--color-neutral-500);font-size:12.5px">Reminder: this payment is non-refundable. Questions? supportcare11@gmail.com · 9120677715</p>
+    </div>
+  </div>
+</div>
 
-            function closeModalFn() {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-            closeModal.addEventListener('click', closeModalFn);
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) closeModalFn();
-            });
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') closeModalFn();
-            });
+<script>
+/* ── Hero counters ─────────────────────────────────────── */
+(function(){
+  var t0 = performance.now();
+  function tick(){
+    var p = Math.min(1,(performance.now()-t0)/1400), e = 1-Math.pow(1-p,3);
+    document.getElementById('statMembers').textContent = Math.round(12*e)+'K+';
+    document.getElementById('statRating').textContent = (4.9*e).toFixed(1)+'★';
+    document.getElementById('statSessions').textContent = Math.round(200*e)+'+';
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
 
-            // ─── Payment Form Submit (simulate PayU redirect) ───
-            paymentForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('fullName').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const phone = document.getElementById('phone').value.trim();
+/* ── Scroll progress + active nav ──────────────────────── */
+(function(){
+  var bar = document.getElementById('progressbar'),
+      ids = ['features','testimonials','progress','meditation','live'],
+      links = document.querySelectorAll('.navlinks a[data-nav]');
+  function onScroll(){
+    var d = document.documentElement;
+    bar.style.width = (d.scrollTop/Math.max(1,d.scrollHeight-d.clientHeight)*100)+'%';
+    var active = '';
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el && el.getBoundingClientRect().top < 220) active = id;
+    });
+    links.forEach(function(a){ a.classList.toggle('active', a.dataset.nav === active); });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+})();
 
-                if (!name || !email || !phone) {
-                    alert('Please fill in all fields (Name, Email, WhatsApp).');
-                    return;
-                }
-                if (!email.includes('@')) {
-                    alert('Please enter a valid email address.');
-                    return;
-                }
+/* ── Testimonial carousel ──────────────────────────────── */
+(function(){
+  var track = document.getElementById('track'), dotsBox = document.getElementById('tDots'),
+      i = 0, pages = 3, timer;
+  for(var k=0;k<pages;k++){
+    var b = document.createElement('button');
+    b.setAttribute('aria-label','Go to testimonial '+(k+1));
+    b.addEventListener('click', (function(n){ return function(){ go(n); }; })(k));
+    dotsBox.appendChild(b);
+  }
+  function render(){
+    track.style.transform = 'translateX(calc('+(-50*i)+'% - '+(i*10)+'px))';
+    dotsBox.querySelectorAll('button').forEach(function(b,n){ b.classList.toggle('on', n===i); });
+  }
+  function go(n){ i = (n+pages)%pages; render(); restart(); }
+  function restart(){ clearInterval(timer); timer = setInterval(function(){ go(i+1); }, 6000); }
+  document.getElementById('tNext').addEventListener('click', function(){ go(i+1); });
+  document.getElementById('tPrev').addEventListener('click', function(){ go(i-1); });
+  render(); restart();
+})();
 
-                const btn = paymentForm.querySelector('.btn');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting to PayU...';
-                btn.disabled = true;
+/* ── Progress stats + ring ─────────────────────────────── */
+(function(){
+  var rows = document.querySelectorAll('#metrics > div'),
+      ring = document.getElementById('ring'), overall = document.getElementById('overall'), C = 326.7;
+  function paint(vals){
+    vals.forEach(function(v,n){
+      rows[n].querySelector('.val').textContent = v+'%';
+      rows[n].querySelector('.bar > span').style.width = v+'%';
+    });
+    var avg = Math.round((vals[0]+vals[1]+vals[2])/3);
+    overall.textContent = avg+'%';
+    ring.setAttribute('stroke-dashoffset', (C*(1-avg/100)).toFixed(1));
+  }
+  paint([72,58,84]);
+  document.getElementById('refreshStats').addEventListener('click', function(){
+    paint([0,1,2].map(function(){ return 45+Math.round(Math.random()*50); }));
+  });
+})();
 
-                // Simulate PayU redirect and success
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-check"></i> Payment Successful!';
-                    btn.style.background = '#72a888';
-                    setTimeout(() => {
-                        closeModalFn();
-                        btn.innerHTML = originalText;
-                        btn.style.background = '#1a2a3a';
-                        btn.disabled = false;
-                        paymentForm.reset();
-                        alert(
-                            '🎉 Welcome to ZenLife! Your subscription is active.\n\n📧 A Zoom meeting link has been sent to your email.\n📱 You will also receive it on WhatsApp.\n\nStart your wellness journey today!');
-                    }, 1500);
-                }, 2000);
-            });
+/* ── Breathwork player ─────────────────────────────────── */
+(function(){
+  var phases = ['Breathe in','Hold','Breathe out'], running = false, elapsed = 0, sessionMin = 10,
+      halo = document.getElementById('halo'), ringV = document.getElementById('ringVisual'),
+      phaseEl = document.getElementById('breathPhase'), timeEl = document.getElementById('breathTime'),
+      icon = document.getElementById('breathIcon'), action = document.getElementById('breathAction');
+  function render(){
+    var idx = Math.floor(elapsed/4)%3, remain = Math.max(0, sessionMin*60-elapsed),
+        scale = running ? (idx===2 ? .82 : 1.22) : 1;
+    halo.style.transform = ringV.style.transform = 'scale('+scale+')';
+    phaseEl.textContent = running ? phases[idx] : 'Ready when you are';
+    timeEl.textContent = (running||elapsed)
+      ? Math.floor(remain/60)+':'+String(remain%60).padStart(2,'0')+' remaining'
+      : sessionMin+'-minute session';
+    icon.className = running ? 'ph-fill ph-pause' : 'ph-fill ph-play';
+    action.textContent = running ? 'Pause' : (elapsed ? 'Resume' : 'Begin session');
+  }
+  setInterval(function(){ if(running){ elapsed++; if(elapsed >= sessionMin*60) running = false; render(); } }, 1000);
+  document.getElementById('breathToggle').addEventListener('click', function(){ running = !running; render(); });
+  document.getElementById('breathReset').addEventListener('click', function(){ running=false; elapsed=0; render(); });
+  document.querySelectorAll('#lengths .pill').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#lengths .pill').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on'); sessionMin = +b.dataset.min; running=false; elapsed=0; render();
+    });
+  });
+  render();
+})();
 
-            // ─── Nav background on scroll ───
-            const nav = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 20) {
-                    nav.style.background = 'rgba(246, 242, 237, 0.92)';
-                    nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.04)';
-                } else {
-                    nav.style.background = 'rgba(246, 242, 237, 0.75)';
-                    nav.style.boxShadow = 'none';
-                }
-            });
+/* ── Live circle countdown + room count ────────────────── */
+(function(){
+  var out = document.getElementById('countdown'), att = document.getElementById('attendees'),
+      slots = [[1,19],[3,20],[5,18]], n = 42;   // [weekday, hour] — Mon 7pm, Wed 8pm, Fri 6pm
+  function tick(){
+    var now = new Date(), best = Infinity;
+    slots.forEach(function(s){
+      for(var k=0;k<8;k++){
+        var d = new Date(now);
+        d.setDate(now.getDate() + ((s[0]-now.getDay()+7)%7) + k*7);
+        d.setHours(s[1],0,0,0);
+        var diff = d - now;
+        if(diff > 0 && diff < best) best = diff;
+      }
+    });
+    var h = Math.floor(best/3600000), m = Math.floor(best%3600000/60000), sec = Math.floor(best%60000/1000);
+    out.textContent = h+'h '+String(m).padStart(2,'0')+'m '+String(sec).padStart(2,'0')+'s';
+    if(Math.random() < .25){ n = Math.max(28, Math.min(96, n + (Math.random()<.5 ? -1 : 2))); att.textContent = n; }
+  }
+  tick(); setInterval(tick, 1000);
+})();
 
-        })();
-    </script>
+/* ── Pricing toggle ───────────────────────────────────── */
+var BILLING = 'monthly', DISCOUNT = 20;
+function planPrice(monthly){
+  return BILLING === 'annual' ? '$'+Math.round(monthly*12*(1-DISCOUNT/100)) : '$'+monthly;
+}
+(function(){
+  document.querySelectorAll('#billing button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#billing button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on'); BILLING = b.dataset.billing;
+      document.querySelectorAll('.plan .price').forEach(function(p){ p.textContent = planPrice(+p.dataset.monthly); });
+      document.querySelectorAll('.plan .per').forEach(function(p){ p.textContent = BILLING === 'annual' ? '/yr' : '/mo'; });
+    });
+  });
+})();
+
+/* ── Checkout dialog ──────────────────────────────────── */
+(function(){
+  var modal = document.getElementById('checkout'), form = document.getElementById('ckForm'),
+      done = document.getElementById('ckDone'), err = document.getElementById('ckError'),
+      summary = document.getElementById('ckSummary'), pay = document.getElementById('ckPay'),
+      prices = {Starter:19, Premium:39, Family:59};
+  function open(plan){
+    var label = planPrice(prices[plan]) + (BILLING === 'annual' ? '/yr' : '/mo');
+    summary.textContent = 'Subscribe to '+plan+' — '+label;
+    pay.textContent = 'Pay '+label;
+    form.style.display = 'grid'; done.style.display = 'none'; err.style.display = 'none';
+    modal.classList.add('open');
+  }
+  function close(){ modal.classList.remove('open'); }
+  document.querySelectorAll('[data-plan]').forEach(function(b){
+    b.addEventListener('click', function(){ open(b.dataset.plan); });
+  });
+  document.getElementById('ckClose').addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if(e.target === modal) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  function fail(msg){ err.textContent = msg; err.style.display = 'block'; }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('ck-name').value.trim(),
+        email = document.getElementById('ck-email').value.trim(),
+        phone = document.getElementById('ck-phone').value.replace(/\D/g,''),
+        agree = document.getElementById('ck-agree').checked;
+    if(!name) return fail('Please enter your full name.');
+    if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) return fail('Please enter a valid email address.');
+    if(!/^\d{10}$/.test(phone)) return fail('Please enter a 10-digit WhatsApp number.');
+    if(!agree) return fail('Please confirm you understand payments are non-refundable.');
+    err.style.display = 'none'; form.style.display = 'none'; done.style.display = 'block';
+    /* Hook your real payment gateway here (PayU / Razorpay / Stripe). */
+  });
+})();
+
+/* ── Policy accordion ─────────────────────────────────── */
+document.querySelectorAll('.faq > button').forEach(function(b){
+  b.addEventListener('click', function(){
+    var item = b.parentElement, wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq').forEach(function(f){
+      f.classList.remove('open'); f.querySelector('button i').className = 'ph ph-plus';
+    });
+    if(!wasOpen){ item.classList.add('open'); b.querySelector('i').className = 'ph ph-minus'; }
+  });
+});
+</script>
 </body>
 </html>
